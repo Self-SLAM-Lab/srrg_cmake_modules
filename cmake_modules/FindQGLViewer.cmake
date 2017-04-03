@@ -1,5 +1,5 @@
 #ds check if qt5 is available - otherwise fallback to qt4
-find_package(Qt5Xml)
+find_package(Qt5Xml QUIET)
 
 # Need to find both Qt4 and QGLViewer if the QQL support is to be built
 if(${Qt5Xml_FOUND})
