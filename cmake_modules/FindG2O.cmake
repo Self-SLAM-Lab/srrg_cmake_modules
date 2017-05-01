@@ -1,14 +1,17 @@
 # Find the header files
 
-SET(G2O_LOCAL_DIR ${PROJECT_SOURCE_DIR}/../g2o)
-SET(G2O_DEEPER_LOCAL_DIR ${PROJECT_SOURCE_DIR}/../../g2o)
-SET(G2O_EXTERNAL_DIR ${PROJECT_SOURCE_DIR}/../../external/g2o_wrapper/g2o)
-message(STATUS "Searching for g2o in " $ENV{G2O_ROOT})
+#SET(G2O_LOCAL_DIR ${PROJECT_SOURCE_DIR}/../g2o)
+#SET(G2O_DEEPER_LOCAL_DIR ${PROJECT_SOURCE_DIR}/../../g2o)
+#SET(G2O_EXTERNAL_DIR ${PROJECT_SOURCE_DIR}/../../external/g2o_wrapper/g2o)
+#message(STATUS "Searching for g2o in " $ENV{G2O_ROOT})
+SET(G2O_SRRG_DIR $ENV{HOME}/source/libraries/g2o)
+message(STATUS "Searching for g2o in " ${G2O_SRRG_DIR})
 
 FIND_PATH(G2O_INCLUDE_DIR g2o/core/base_vertex.h
-  ${G2O_LOCAL_DIR}
-  ${G2O_DEEPER_LOCAL_DIR}
-  ${G2O_EXTERNAL_DIR}
+  #${G2O_LOCAL_DIR}
+  #${G2O_DEEPER_LOCAL_DIR}
+  #${G2O_EXTERNAL_DIR}
+  ${G2O_SRRG_DIR}
   $ENV{G2O_ROOT}/include
   $ENV{G2O_ROOT}
   /usr/local/include
@@ -18,7 +21,7 @@ FIND_PATH(G2O_INCLUDE_DIR g2o/core/base_vertex.h
   /sw/include
   NO_DEFAULT_PATH
   )
-
+message(STATUS "Found g2o " ${G2O_INCLUDE_DIR})
 
 # Macro to unify finding both the debug and release versions of the
 # libraries; this is adapted from the OpenSceneGraph FIND_LIBRARY
@@ -29,12 +32,14 @@ MACRO(FIND_G2O_LIBRARY MYLIBRARY MYLIBRARYNAME)
   FIND_LIBRARY("${MYLIBRARY}_DEBUG"
     NAMES "g2o_${MYLIBRARYNAME}_d"
     PATHS
-    ${G2O_LOCAL_DIR}/lib/Debug
-    ${G2O_LOCAL_DIR}/lib
-    ${G2O_DEEPER_LOCAL_DIR}/lib/Debug
-    ${G2O_DEEPER_LOCAL_DIR}/lib
-    ${G2O_EXTERNAL_DIR}/lib/Debug
-    ${G2O_EXTERNAL_DIR}/lib
+    #${G2O_LOCAL_DIR}/lib/Debug
+    #${G2O_LOCAL_DIR}/lib
+    #${G2O_DEEPER_LOCAL_DIR}/lib/Debug
+    #${G2O_DEEPER_LOCAL_DIR}/lib
+    #${G2O_EXTERNAL_DIR}/lib/Debug
+    #${G2O_EXTERNAL_DIR}/lib
+    ${G2O_SRRG_DIR}/lib/Debug
+    ${G2O_SRRG_DIR}/lib
     ${G2O_ROOT}/lib/Debug
     ${G2O_ROOT}/lib
     $ENV{G2O_ROOT}/lib/Debug
@@ -59,12 +64,14 @@ MACRO(FIND_G2O_LIBRARY MYLIBRARY MYLIBRARYNAME)
   FIND_LIBRARY(${MYLIBRARY}
     NAMES "g2o_${MYLIBRARYNAME}"
     PATHS
-    ${G2O_LOCAL_DIR}/lib/Release
-    ${G2O_LOCAL_DIR}/lib
-    ${G2O_DEEPER_LOCAL_DIR}/lib/Release
-    ${G2O_DEEPER_LOCAL_DIR}/lib
-    ${G2O_EXTERNAL_DIR}/lib/Release
-    ${G2O_EXTERNAL_DIR}/lib
+    #${G2O_LOCAL_DIR}/lib/Release
+    #${G2O_LOCAL_DIR}/lib
+    #${G2O_DEEPER_LOCAL_DIR}/lib/Release
+    #${G2O_DEEPER_LOCAL_DIR}/lib
+    #${G2O_EXTERNAL_DIR}/lib/Release
+    #${G2O_EXTERNAL_DIR}/lib
+    ${G2O_SRRG_DIR}/lib/Release
+    ${G2O_SRRG_DIR}/lib
     ${G2O_ROOT}/lib/Release
     ${G2O_ROOT}/lib
     $ENV{G2O_ROOT}/lib/Release
