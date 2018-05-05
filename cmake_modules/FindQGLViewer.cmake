@@ -28,21 +28,25 @@ find_path(QGLVIEWER_INCLUDE_DIR qglviewer.h
 )
 
 if(${Qt5Xml_FOUND})
-  find_library(QGLVIEWER_LIBRARY NAMES  qglviewer-qt5 QGLViewer
+  find_library(QGLVIEWER_LIBRARY NAMES qglviewer qglviewer-qt5 qglviewer-dev-qt5 QGLViewer QGLViewer-qt5
     PATHS
     /usr/lib
     /usr/local/lib
     /opt/local/lib
     /sw/lib
-)
+    /var/lib
+    /usr/lib/x86_64-linux-gnu
+  )
 else()
-  find_library(QGLVIEWER_LIBRARY NAMES  qglviewer-qt4 QGLViewer
+  find_library(QGLVIEWER_LIBRARY NAMES qglviewer qglviewer-qt4 qglviewer-dev-qt4 QGLViewer QGLViewer-qt4
     PATHS
     /usr/lib
     /usr/local/lib
     /opt/local/lib
     /sw/lib
-)
+    /var/lib
+    /usr/lib/x86_64-linux-gnu
+  )
 endif()
 
 if(QGLVIEWER_INCLUDE_DIR AND QGLVIEWER_LIBRARY)
