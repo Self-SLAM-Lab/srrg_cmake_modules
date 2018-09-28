@@ -21,10 +21,11 @@ FIND_PATH(G2O_INCLUDE_DIR g2o/core/base_vertex.h
   /sw/include
   NO_DEFAULT_PATH
   )
-if(NOT "${G2O_INCLUDE_DIR}" STREQUAL "")
+if(G2O_INCLUDE_DIR)
   message("srrg_cmake_modules|found g2o:  ${G2O_INCLUDE_DIR}")
 else()
   set(G2O_SRRG_DIR "")
+  message("srrg_cmake_modules|g2o not found")
 endif()
 
 # Macro to unify finding both the debug and release versions of the
@@ -64,7 +65,7 @@ MACRO(FIND_G2O_LIBRARY MYLIBRARY MYLIBRARYNAME)
     /sw/local/lib
     /sw/lib
     )
-  
+
   FIND_LIBRARY(${MYLIBRARY}
     NAMES "g2o_${MYLIBRARYNAME}"
     PATHS
@@ -96,13 +97,13 @@ MACRO(FIND_G2O_LIBRARY MYLIBRARY MYLIBRARYNAME)
     /sw/local/lib
     /sw/lib
     )
-  
+
   IF(NOT ${MYLIBRARY}_DEBUG)
     IF(MYLIBRARY)
       SET(${MYLIBRARY}_DEBUG ${MYLIBRARY})
     ENDIF(MYLIBRARY)
   ENDIF( NOT ${MYLIBRARY}_DEBUG)
-  
+
 ENDMACRO(FIND_G2O_LIBRARY LIBRARY LIBRARYNAME)
 
 # Find the core elements
@@ -148,11 +149,12 @@ IF(G2O_STUFF_LIBRARY AND G2O_CORE_LIBRARY AND G2O_INCLUDE_DIR AND G2O_SOLVERS_FO
 ENDIF(G2O_STUFF_LIBRARY AND G2O_CORE_LIBRARY AND G2O_INCLUDE_DIR AND G2O_SOLVERS_FOUND)
 
 # Set variables for srrg environment
+# srrg@dom surround these with IF(G2O_FOUND)??
 set(SRRG_G2O_INCLUDE ${G2O_INCLUDE_DIR})
 set(SRRG_G2O_LIBRARIES
   ${G2O_STUFF_LIBRARY}
   ${G2O_OPENGL_HELPER_LIBRARY}
-  ${G2O_CORE_LIBRARY} 
+  ${G2O_CORE_LIBRARY}
   ${G2O_HIERARCHICAL_LIBRARY}
   ${G2O_CLI_LIBRARY}
   ${G2O_SOLVER_CHOLMOD}
@@ -167,7 +169,7 @@ set(SRRG_G2O_LIBRARIES
   ${G2O_TYPES_ICP}
   ${G2O_TYPES_SBA}
   ${G2O_TYPES_SCLAM2D}
-  ${G2O_TYPES_SIM3} 
+  ${G2O_TYPES_SIM3}
   ${G2O_TYPES_SLAM2D}
   ${G2O_TYPES_SLAM3D}
   ${G2O_TYPES_SLAM2D_ADDONS}
