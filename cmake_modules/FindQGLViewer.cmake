@@ -20,7 +20,7 @@ else()
     )
 endif()
 
-find_path(QGLVIEWER_INCLUDE_DIR qglviewer.h
+find_path(QGLViewer_INCLUDE_DIRS qglviewer.h
   /usr/include/QGLViewer
   /opt/local/include/QGLViewer
   /usr/local/include/QGLViewer
@@ -28,7 +28,7 @@ find_path(QGLVIEWER_INCLUDE_DIR qglviewer.h
 )
 
 if(${Qt5Xml_FOUND})
-  find_library(QGLVIEWER_LIBRARY NAMES qglviewer qglviewer-qt5 qglviewer-dev-qt5 QGLViewer QGLViewer-qt5
+  find_library(QGLViewer_LIBRARIES NAMES qglviewer qglviewer-qt5 qglviewer-dev-qt5 QGLViewer QGLViewer-qt5
     PATHS
     /usr/lib
     /usr/local/lib
@@ -38,7 +38,7 @@ if(${Qt5Xml_FOUND})
     /usr/lib/x86_64-linux-gnu
   )
 else()
-  find_library(QGLVIEWER_LIBRARY NAMES qglviewer qglviewer-qt4 qglviewer-dev-qt4 QGLViewer QGLViewer-qt4
+  find_library(QGLViewer_LIBRARIES NAMES qglviewer qglviewer-qt4 qglviewer-dev-qt4 QGLViewer QGLViewer-qt4
     PATHS
     /usr/lib
     /usr/local/lib
@@ -49,8 +49,8 @@ else()
   )
 endif()
 
-if(QGLVIEWER_INCLUDE_DIR AND QGLVIEWER_LIBRARY)
-  set(QGLVIEWER_FOUND TRUE)
-else(QGLVIEWER_INCLUDE_DIR AND QGLVIEWER_LIBRARY)
-  set(QGLVIEWER_FOUND FALSE)
-endif(QGLVIEWER_INCLUDE_DIR AND QGLVIEWER_LIBRARY)
+if(QGLViewer_INCLUDE_DIRS AND QGLViewer_LIBRARIES)
+  set(QGLViewer_FOUND TRUE)
+else(QGLViewer_INCLUDE_DIRS AND QGLViewer_LIBRARIES)
+  set(QGLViewer_FOUND FALSE)
+endif(QGLViewer_INCLUDE_DIRS AND QGLViewer_LIBRARIES)
