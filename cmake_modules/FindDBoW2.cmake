@@ -1,30 +1,25 @@
-find_library(DBoW2_LIBRARY DBoW2)
-message("DBoW LIBRARY: ${DBoW2_LIBRARY}")
+# Find the header files
+set(DBoW2_DIR $ENV{HOME}/source/libraries/DBoW2)
+message("srrg_cmake_modules|searching for DBoW2 in: " ${DBoW2_DIR})
 
-
-find_path(DBoW2_ROOT_DIR
-  NAMES include/DBoW2/DBoW2.h
-  HINTS DBoW2
-)
-message("DBoW ROOT: ${DBoW2_ROOT_DIR}")
-
-
-find_path(DBoW2_INCLUDE_DIR
+FIND_PATH(DBoW2_INCLUDE_DIR
   NAMES DBoW2/DBoW2.h
-  HINTS ${DBoW2_ROOT_DIR}/include
-)
-
-message("DBoW INCLUDE: ${DBoW2_INCLUDE_DIR}")
+  HINTS ${DBoW2_DIR} )
 
 
-include(FindPackageHandleStandardArgs)
-# handle the QUIETLY and REQUIRED arguments and set LIBXML2_FOUND to TRUE
-# if all listed variables are TRUE
-find_package_handle_standard_args(DBoW2  DEFAULT_MSG
-                                  DBoW2_LIBRARY DBoW2_INCLUDE_DIR DBoW2_ROOT_DIR)
 
-mark_as_advanced(DBoW2_INCLUDE_DIR DBoW2_LIBRARY DBoW2_ROOT_DIR)
+if(DBoW2_INCLUDE_DIR)
+  message("srrg_cmake_modules|found DBoW2:  ${DBoW2_INCLUDE_DIR}")
+  set(DBoW2_LIBRARY ${DBoW2_INCLUDE_DIR}/../build/libDBoW2.so)
+  message("srrg_cmake_modules|DBoW2 LIB:  ${DBoW2_LIBRARY}")
+else()
+  message("srrg_cmake_modules|DBoW2 not found | bdc HARDCODING")
+  set(DBoW2_INCLUDE_DIR ${DBoW2_DIR}/include)
+  set(DBoW2_LIBRARY ${DBoW2_INCLUDE_DIR}/../build/libDBoW2.so)
+  message("srrg_cmake_modules|DBoW2 INCLUDE:  ${DBoW2_INCLUDE_DIR}")
+  message("srrg_cmake_modules|DBoW2 LIB    :  ${DBoW2_LIBRARY}")
+endif()
 
-set(DBoW2_DIR ${DBoW2_ROOT_DIR} )
-set(DBoW2_LIBRARIES ${DBoW2_LIBRARY} )
-set(DBoW2_INCLUDE_DIRS ${DBoW2_INCLUDE_DIR} )
+set(DBoW2_DIRS ${DBoW2_DIR})
+set(DBoW2_INCLUDE_DIRS ${DBoW2_INCLUDE_DIR})
+set(DBoW2_LIBRARIES ${DBoW2_LIBRARY})
