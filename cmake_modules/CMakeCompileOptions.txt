@@ -1,5 +1,7 @@
 # general options
 
+#set(CMAKE_BUILD_TYPE Debug)
+
 if(NOT CMAKE_BUILD_TYPE)
 set(CMAKE_BUILD_TYPE Release)
 endif()
