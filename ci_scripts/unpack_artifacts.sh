@@ -33,7 +33,8 @@ TOKEN="$4"
 ARTIFACT_DOWNLOAD_URL="https://gitlab.com/api/v4/projects/srrg-software%2F${PROJECT_NAME}/jobs/artifacts/${BRANCH_NAME}/download?job=${JOB_NAME}"
 
 #ds download artifacts into current folder using the gitlab api
-wget --header "PRIVATE-TOKEN: $TOKEN" "$ARTIFACT_DOWNLOAD_URL" --output-document "artifacts.zip"
+echo "wget --header JOB-TOKEN: $TOKEN $ARTIFACT_DOWNLOAD_URL --output-document artifacts.zip"
+wget --header "JOB-TOKEN: $TOKEN" "$ARTIFACT_DOWNLOAD_URL" --output-document "artifacts.zip"
 
 #ds unzip artifacts into corresponding folders and remove file containers
 unzip artifacts.zip
