@@ -19,7 +19,11 @@ echo "GTEST_LIBRARY_PATH=$GTEST_LIBRARY_PATH"
 
 #ds package build artifacts for upload
 mkdir -p "${PROJECT_ROOT_PATH}/artifacts"
-tar czf ${PROJECT_ROOT_PATH}/artifacts/build.tar.gz "$GTEST_LIBRARY_PATH"
+if [ ! -z "$GTEST_LIBRARY_PATH" ]; then
+  tar czf ${PROJECT_ROOT_PATH}/artifacts/build.tar.gz "$GTEST_LIBRARY_PATH"
+else
+  tar czf ${PROJECT_ROOT_PATH}/artifacts/build.tar.gz ""
+fi
 tar czf ${PROJECT_ROOT_PATH}/artifacts/devel.tar.gz "devel"
 ls -al "${PROJECT_ROOT_PATH}/artifacts/"
 echo "--------------------------------------------------------------------------------"
