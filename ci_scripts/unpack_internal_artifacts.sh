@@ -14,7 +14,7 @@ fi
 #ds start
 echo "--------------------------------------------------------------------------------"
 echo "bash version: ${BASH_VERSION}"
-pwd
+cd "/root/workspace/"
 PROJECT_ROOT_PATH="$1"
 
 #ds restore build artifacts from previous corresponding stage of this project
