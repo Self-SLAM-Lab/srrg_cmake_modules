@@ -42,6 +42,9 @@ tar xzf artifacts/build.tar.gz
 tar xzf artifacts/devel.tar.gz
 rm -rf artifacts
 
+#ds blacklist the loaded project in catkin to disable rebuilding in any circumstances
+catkin config --blacklist "$PROJECT_NAME"
+
 fi
 
 #ds update library path environment variable to include unpacked artifacts
