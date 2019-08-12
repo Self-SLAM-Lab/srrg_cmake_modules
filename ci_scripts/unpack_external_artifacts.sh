@@ -46,5 +46,5 @@ if [ -z "$CATKIN_BLACKLIST" ]; then
 else
   CATKIN_BLACKLIST="${CATKIN_BLACKLIST} $PROJECT_NAME"
 fi
+catkin config --blacklist $CATKIN_BLACKLIST
 export CATKIN_BLACKLIST
-catkin config --blacklist "$CATKIN_BLACKLIST"
