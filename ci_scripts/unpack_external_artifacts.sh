@@ -41,7 +41,7 @@ echo "--------------------------------------------------------------------------
 
 #ds blacklist the loaded project in catkin to disable rebuilding in any circumstances
 #ds we have to extend the previous blacklist since the command is not appending
-if [ ! -z "$GTEST_LIBRARY_PATH" ]; then
+if [ ! -z "$CATKIN_BLACKLIST" ]; then
   CATKIN_BLACKLIST="$PROJECT_NAME"
 else
   CATKIN_BLACKLIST="${CATKIN_BLACKLIST} $PROJECT_NAME"
