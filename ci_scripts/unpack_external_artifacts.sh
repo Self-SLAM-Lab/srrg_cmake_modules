@@ -14,7 +14,6 @@ fi
 #ds start
 echo "--------------------------------------------------------------------------------"
 echo "bash version: ${BASH_VERSION}"
-pwd
 PROJECT_NAME="$1"
 BRANCH_NAME="$2"
 JOB_NAME="$3"
@@ -22,7 +21,7 @@ TOKEN="$4"
 
 #ds clone project to catkin source folder (requires SSH key to be properly set up)
 cd "/root/workspace/src/"
-git clone "git@gitlab.com:srrg-software/${PROJECT_NAME}.git"
+git clone --single-branch --branch "$BRANCH_NAME" "git@gitlab.com:srrg-software/${PROJECT_NAME}.git"
 
 #ds assemble project artifact URL
 ARTIFACT_DOWNLOAD_URL="https://gitlab.com/api/v4/projects/srrg-software%2F${PROJECT_NAME}/jobs/artifacts/${BRANCH_NAME}/download?job=${JOB_NAME}"
