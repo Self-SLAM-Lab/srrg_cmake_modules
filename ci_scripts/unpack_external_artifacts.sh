@@ -40,4 +40,7 @@ rm -rf artifacts
 echo "--------------------------------------------------------------------------------"
 
 #ds blacklist the loaded project in catkin to disable rebuilding in any circumstances
-catkin config --blacklist "$PROJECT_NAME"
+#ds we have to extend the previous blacklist since the command is not appending
+CATKIN_BLACKLIST="${CATKIN_BLACKLIST} $PROJECT_NAME"
+export CATKIN_BLACKLIST
+catkin config --blacklist "$CATKIN_BLACKLIST"
