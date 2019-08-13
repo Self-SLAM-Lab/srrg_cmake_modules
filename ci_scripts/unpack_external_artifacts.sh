@@ -41,9 +41,9 @@ echo -en "\e[1;96m--------------------------------------------------------------
 #ds blacklist the loaded project in catkin to disable rebuilding in any circumstances
 #ds we have to extend the previous blacklist since the command is not appending
 if [ -z "$CATKIN_BLACKLIST" ]; then
-  CATKIN_BLACKLIST="$PROJECT_NAME"
+  CATKIN_BLACKLIST="$PROJECT_NAME ${PROJECT_NAME}_ros"
 else
-  CATKIN_BLACKLIST="${CATKIN_BLACKLIST} $PROJECT_NAME"
+  CATKIN_BLACKLIST="${CATKIN_BLACKLIST} $PROJECT_NAME ${PROJECT_NAME}_ros"
 fi
 catkin config --blacklist $CATKIN_BLACKLIST
 export CATKIN_BLACKLIST
