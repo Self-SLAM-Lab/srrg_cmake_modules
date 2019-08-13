@@ -12,8 +12,8 @@ if [ "$#" -ne 1 ]; then
 fi
 
 #ds start
-echo "--------------------------------------------------------------------------------"
-echo "bash version: ${BASH_VERSION}"
+echo -e "\e[96m--------------------------------------------------------------------------------\e[0m"
+echo -e "\e[96mbash version: ${BASH_VERSION}\e[0m"
 cd "/root/workspace/"
 PROJECT_ROOT_PATH="$1"
 
@@ -21,4 +21,4 @@ PROJECT_ROOT_PATH="$1"
 tar xzf "${PROJECT_ROOT_PATH}/artifacts/build.tar.gz"
 tar xzf "${PROJECT_ROOT_PATH}/artifacts/devel.tar.gz"
 ls -al
-echo "--------------------------------------------------------------------------------"
+echo -e "\e[96m--------------------------------------------------------------------------------\e[0m"
