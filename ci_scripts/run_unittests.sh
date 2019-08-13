@@ -18,8 +18,8 @@ TEST_BINARIES_PATH="${REPOSITORY_PATH}/${PROJECT_NAME}/tests"
 if [ -d "$TEST_BINARIES_PATH" ]; then
   #ds parse test binaries from test path
   TEST_BINARIES=($(ls ${TEST_BINARIES_PATH}))
-  echo "found test files in '${TEST_BINARIES_PATH}': "
-  echo "${TEST_BINARIES[@]} (unfiltered)"
+  echo "found test files in '${TEST_BINARIES_PATH}' (unfiltered): "
+  echo "${TEST_BINARIES[@]}"
   
   #ds call each binary (skipping all files that do not end in cpp nor start with test)
   for TEST_BINARY in "${TEST_BINARIES[@]}"
@@ -28,6 +28,8 @@ if [ -d "$TEST_BINARIES_PATH" ]; then
     TEST_BINARY_PREFIX=${TEST_BINARY:0:4}
     TEST_BINARY_FILE_TYPE=${TEST_BINARY:${#TEST_BINARY}-4:4}
     if [ ${TEST_BINARY_PREFIX} == "test" ] && [ ${TEST_BINARY_FILE_TYPE} == ".cpp" ]; then
+      echo ""
+      echo "${WORKSPACE_PATH}/${PROJECT_NAME}/${TEST_BINARY:0:${#TEST_BINARY}-4}"
   	  ${WORKSPACE_PATH}/${PROJECT_NAME}/${TEST_BINARY:0:${#TEST_BINARY}-4}
   	fi
   done

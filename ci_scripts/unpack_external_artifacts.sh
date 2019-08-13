@@ -28,7 +28,7 @@ ARTIFACT_DOWNLOAD_URL="https://gitlab.com/api/v4/projects/srrg-software%2F${PROJ
 
 #ds download artifacts into the catkin workspace folder using the gitlab api
 cd "/root/workspace/"
-wget --header "PRIVATE-TOKEN: $TOKEN" "$ARTIFACT_DOWNLOAD_URL" --output-document "artifacts.zip"
+wget --no-verbose --header "PRIVATE-TOKEN: $TOKEN" "$ARTIFACT_DOWNLOAD_URL" --output-document "artifacts.zip"
 
 #ds unzip artifacts into corresponding folders and remove file containers
 unzip artifacts.zip
