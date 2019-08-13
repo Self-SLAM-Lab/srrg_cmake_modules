@@ -9,14 +9,14 @@ fi
 #ds parameters
 PROJECT_ROOT_PATH="$1"
 PROJECT_NAME="$2"
-echo -e "\e[96m--------------------------------------------------------------------------------\e[0m"
-echo -e "\e[96mbash version: ${BASH_VERSION}\e[0m"
+echo -en "\e[1;96m--------------------------------------------------------------------------------\e[0m"
+echo -en "\e[1;96mbash version: ${BASH_VERSION}\e[0m"
 cd "/root/workspace/"
 ls -al
 
 #ds determine gtest library location in the build folder
 GTEST_LIBRARY_PATH=$(find "build/${PROJECT_NAME}" -name "libgtest.so")
-echo -e "\e[96mGTEST_LIBRARY_PATH='${GTEST_LIBRARY_PATH}'\e[0m"
+echo -en "\e[1;96mGTEST_LIBRARY_PATH='${GTEST_LIBRARY_PATH}'\e[0m"
 
 #ds package build artifacts for upload
 mkdir -p "${PROJECT_ROOT_PATH}/artifacts"
@@ -28,4 +28,4 @@ else
 fi
 tar czf ${PROJECT_ROOT_PATH}/artifacts/devel.tar.gz "devel"
 ls -al "${PROJECT_ROOT_PATH}/artifacts/"
-echo -e "\e[96m--------------------------------------------------------------------------------\e[0m"
+echo -en "\e[1;96m--------------------------------------------------------------------------------\e[0m"

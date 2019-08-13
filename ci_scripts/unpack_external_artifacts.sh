@@ -12,8 +12,8 @@ if [ "$#" -ne 4 ]; then
 fi
 
 #ds start
-echo -e "\e[96m--------------------------------------------------------------------------------\e[0m"
-echo -e "\e[96mbash version: ${BASH_VERSION}\e[0m"
+echo -en "\e[1;96m--------------------------------------------------------------------------------\e[0m"
+echo -en "\e[1;96mbash version: ${BASH_VERSION}\e[0m"
 PROJECT_NAME="$1"
 BRANCH_NAME="$2"
 JOB_NAME="$3"
@@ -36,7 +36,7 @@ rm artifacts.zip
 tar xzf artifacts/build.tar.gz
 tar xzf artifacts/devel.tar.gz
 rm -rf artifacts
-echo -e "\e[96m--------------------------------------------------------------------------------\e[0m"
+echo -en "\e[1;96m--------------------------------------------------------------------------------\e[0m"
 
 #ds blacklist the loaded project in catkin to disable rebuilding in any circumstances
 #ds we have to extend the previous blacklist since the command is not appending

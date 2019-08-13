@@ -7,8 +7,8 @@ if [ "$#" -ne 3 ]; then
 fi
 
 #ds set parameters
-echo -e "\e[96m--------------------------------------------------------------------------------\e[0m"
-echo -e "\e[96mbash version: ${BASH_VERSION}\e[0m"
+echo -en "\e[1;96m--------------------------------------------------------------------------------\e[0m"
+echo -en "\e[1;96mbash version: ${BASH_VERSION}\e[0m"
 REPOSITORY_PATH="$1"
 WORKSPACE_PATH="$2"
 PROJECT_NAME="$3"
@@ -18,8 +18,8 @@ TEST_BINARIES_PATH="${REPOSITORY_PATH}/${PROJECT_NAME}/tests"
 if [ -d "$TEST_BINARIES_PATH" ]; then
   #ds parse test binaries from test path
   TEST_BINARIES=($(ls ${TEST_BINARIES_PATH}))
-  echo -e "\e[96mfound test files in '${TEST_BINARIES_PATH}' (unfiltered): \e[0m"
-  echo -e "\e[96m${TEST_BINARIES[@]}\e[0m"
+  echo -en "\e[1;96mfound test files in '${TEST_BINARIES_PATH}' (unfiltered): \e[0m"
+  echo -en "\e[1;96m${TEST_BINARIES[@]}\e[0m"
 
   #ds call each binary (skipping all files that do not end in cpp nor start with test)
   for TEST_BINARY in "${TEST_BINARIES[@]}"
@@ -29,11 +29,11 @@ if [ -d "$TEST_BINARIES_PATH" ]; then
     TEST_BINARY_FILE_TYPE=${TEST_BINARY:${#TEST_BINARY}-4:4}
     if [ ${TEST_BINARY_PREFIX} == "test" ] && [ ${TEST_BINARY_FILE_TYPE} == ".cpp" ]; then
       echo ""
-      echo -e "\e[96m${WORKSPACE_PATH}/${PROJECT_NAME}/${TEST_BINARY:0:${#TEST_BINARY}-4}\e[0m"
+      echo -en "\e[1;96m${WORKSPACE_PATH}/${PROJECT_NAME}/${TEST_BINARY:0:${#TEST_BINARY}-4}\e[0m"
   	  ${WORKSPACE_PATH}/${PROJECT_NAME}/${TEST_BINARY:0:${#TEST_BINARY}-4}
   	fi
   done
 else 
-  echo -e "\e[96mtest directory: $TEST_BINARIES_PATH is not existing - skipping tests\e[0m"
+  echo -en "\e[1;96mtest directory: $TEST_BINARIES_PATH is not existing - skipping tests\e[0m"
 fi
-echo -e "\e[96m--------------------------------------------------------------------------------\e[0m"
+echo -en "\e[1;96m--------------------------------------------------------------------------------\e[0m"
