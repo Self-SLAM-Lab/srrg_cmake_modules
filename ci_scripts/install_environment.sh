@@ -13,6 +13,9 @@ echo "--------------------------------------------------------------------------
 echo "bash version: $BASH_VERSION"
 
 #ds generic build dependencies (valid for ubuntu 16.04 and 18.04)
+apt-get update 
+apt-get upgrade -y
+apt-get install -y sudo ssh openssh-client git
 apt install python-catkin-tools -y
 apt install build-essential -y
 apt install libeigen3-dev -y
