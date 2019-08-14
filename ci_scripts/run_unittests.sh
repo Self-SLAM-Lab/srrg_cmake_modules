@@ -19,7 +19,7 @@ if [ -d "$TEST_BINARIES_PATH" ]; then
   #ds parse test binaries from test path
   TEST_BINARIES=($(ls ${TEST_BINARIES_PATH}))
   echo -en "\e[1;96mfound test files in '${TEST_BINARIES_PATH}' (unfiltered): \e[0m"
-  echo -en "\e[1;96m${TEST_BINARIES[@]}\e[0m"
+  echo "${TEST_BINARIES[@]}"
 
   #ds call each binary (skipping all files that do not end in cpp nor start with test)
   for TEST_BINARY in "${TEST_BINARIES[@]}"
