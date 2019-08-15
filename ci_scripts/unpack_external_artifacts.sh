@@ -20,21 +20,21 @@ BRANCH_NAME="$2"
 JOB_NAME="$3"
 TOKEN="$4"
 
+#ds clone project to catkin source folder (requires SSH key to be properly set up)
+cd "/root/workspace/src/"
+git clone --single-branch --branch "$BRANCH_NAME" "git@gitlab.com:srrg-software/${PROJECT_NAME}.git"
+
 #ds check if the commit hash of the available artifacts corresponds to the last push
 #ds if not, we won't be fetching the artifacts and instead perform a rebuild (otherwise we risk build inconsistencies)
 echo -en "\e[1;96mchecking status of latest commit for: ${PROJECT_NAME}/${BRANCH_NAME}\e[0m"
 LATEST_COMMIT_URL="https://gitlab.com/api/v4/projects/srrg-software%2F${PROJECT_NAME}/repository/commits/${BRANCH_NAME}"
 COMMIT_STATUS=$(curl --header "PRIVATE-TOKEN: $TOKEN" "$LATEST_COMMIT_URL")
 if [[ $COMMIT_STATUS != *"\"status\":\"success\""* ]]; then
-  echo -en "\e[1;93mcommit not successful - skipping artifact import\e[0m"
+  echo -e "\e[1;93mcommit not successful - skipping artifact import\e[0m"
   return #ds statement has no effect if script is not sourced
   exit #ds escape in any case (skipped when sourcing, otherwise fatal)
 fi
 echo -en "\e[1;96mstatus:success - importing artifacts\e[0m"
-
-#ds clone project to catkin source folder (requires SSH key to be properly set up)
-cd "/root/workspace/src/"
-git clone --single-branch --branch "$BRANCH_NAME" "git@gitlab.com:srrg-software/${PROJECT_NAME}.git"
 
 #ds assemble project artifact URL
 ARTIFACT_DOWNLOAD_URL="https://gitlab.com/api/v4/projects/srrg-software%2F${PROJECT_NAME}/jobs/artifacts/${BRANCH_NAME}/download?job=${JOB_NAME}"
