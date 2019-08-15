@@ -9,8 +9,8 @@ fi
 #ds set parameters
 PROJECT_DIRECTORY="$1"
 PROJECT_NAME="$2"
-echo -en "\e[1;96m--------------------------------------------------------------------------------\e[0m"
-echo -en "\e[1;96mbash version: ${BASH_VERSION}\e[0m"
+echo -e "\e[1;96m--------------------------------------------------------------------------------\e[0m"
+echo -e "\e[1;96mbash version: ${BASH_VERSION}\e[0m"
 
 #ds generic build dependencies (valid for ubuntu 16.04 and 18.04)
 apt-get update 
@@ -29,4 +29,4 @@ ln -s "$PROJECT_DIRECTORY" "/root/workspace/src/${PROJECT_NAME}"
 #ds setup test data path (routed through source directory for local compatibility)
 mkdir -p /root/source/srrg && mkdir -p /root/source/srrg2
 ln -s "$PROJECT_DIRECTORY" "/root/source/srrg2/${PROJECT_NAME}"
-echo -en "\e[1;96m--------------------------------------------------------------------------------\e[0m"
+echo -e "\e[1;96m--------------------------------------------------------------------------------\e[0m"
