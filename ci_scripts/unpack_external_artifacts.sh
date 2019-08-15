@@ -1,4 +1,5 @@
 #!/bin/bash
+#ds this script is intended to be sourced!
 
 #ds gitlab artifact resources:
 #https://docs.gitlab.com/ee/user/project/pipelines/job_artifacts.html
@@ -26,7 +27,8 @@ LATEST_COMMIT_URL="https://gitlab.com/api/v4/projects/srrg-software%2F${PROJECT_
 COMMIT_STATUS=$(curl --header "PRIVATE-TOKEN: $TOKEN" "$LATEST_COMMIT_URL")
 if [[ $COMMIT_STATUS != *"\"status\":\"success\""* ]]; then
   echo -en "\e[1;93mcommit not successful - skipping artifact import\e[0m"
-  exit
+  return #ds statement has no effect if script is not sourced
+  exit #ds escape in any case (skipped when sourcing, otherwise fatal)
 fi
 echo -en "\e[1;96mstatus:success - importing artifacts\e[0m"
 
