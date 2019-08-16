@@ -34,6 +34,6 @@ if [ -d "$TEST_BINARIES_PATH" ]; then
   	fi
   done
 else 
-  echo -e "\e[1;96mtest directory: $TEST_BINARIES_PATH is not existing - skipping tests\e[0m"
+  echo -e "\e[1;93mtest directory: $TEST_BINARIES_PATH is not existing - skipping tests (confirm if running this stage is necessary!)\e[0m"
 fi
 echo -e "\e[1;96m--------------------------------------------------------------------------------\e[0m"
