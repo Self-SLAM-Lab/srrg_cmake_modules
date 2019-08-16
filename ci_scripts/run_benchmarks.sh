@@ -24,8 +24,8 @@ if [ -d "$EXECUTABLES_PATH" ]; then
   #ds call each binary (skipping all files that do not end in cpp nor start with test)
   for EXECUTABLE in "${EXECUTABLES[@]}"
   do
-    #ds binary must start with test keyword and end in .cpp
-    EXECUTABLE_PREFIX=${EXECUTABLE:0:4}
+    #ds binary must start with benchmark keyword and end in .cpp
+    EXECUTABLE_PREFIX=${EXECUTABLE:0:9}
     EXECUTABLE_FILE_TYPE=${EXECUTABLE:${#EXECUTABLE}-4:4}
     if [ ${EXECUTABLE_PREFIX} == "benchmark" ] && [ ${EXECUTABLE_FILE_TYPE} == ".cpp" ]; then
       echo ""
