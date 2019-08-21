@@ -22,7 +22,24 @@ TOKEN="$4"
 
 #ds clone project to catkin source folder (requires SSH key to be properly set up)
 cd "/root/workspace/src/"
-git clone --single-branch --branch "$BRANCH_NAME" "git@gitlab.com:srrg-software/${PROJECT_NAME}.git"
+git clone "git@gitlab.com:srrg-software/${PROJECT_NAME}.git"
+
+#ds check if selected branch is available
+cd "$PROJECT_NAME"
+AVAILABLE_BRANCHES=$(git branch -r)
+echo -e "\e[1;96mavailable branches in ${PROJECT_NAME}: \e[0m"
+echo "$AVAILABLE_BRANCHES"
+
+#ds if the desired branch is available
+if [[ $AVAILABLE_BRANCHES == *"origin/${BRANCH_NAME}"* ]]; then
+  #ds check out the corresponding branch
+  git checkout "$BRANCH_NAME"
+else
+  #ds otherwise we stay on master (already checked out)
+  echo -e "\e[1;96mtarget BRANCH_NAME='${BRANCH_NAME}' not available, staying on 'master'\e[0m"
+  BRANCH_NAME="master"
+fi
+cd "/root/workspace/src/"
 
 #ds check if the commit hash of the available artifacts corresponds to the last push
 #ds if not, we won't be fetching the artifacts and instead perform a rebuild (otherwise we risk build inconsistencies)
