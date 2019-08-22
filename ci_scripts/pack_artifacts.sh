@@ -20,12 +20,17 @@ echo -e "\e[1;96mGTEST_LIBRARY_PATH='${GTEST_LIBRARY_PATH}'\e[0m"
 
 #ds package build artifacts for upload
 mkdir -p "${PROJECT_ROOT_PATH}/artifacts"
+
+#ds ship gtest library built for the current workspace (TODO make this clean)
+#ds TODO add further build items here
 if [ ! -z "$GTEST_LIBRARY_PATH" ]; then
   tar czf ${PROJECT_ROOT_PATH}/artifacts/build.tar.gz "$GTEST_LIBRARY_PATH"
 else
   echo "no tests found for project: '${PROJECT_NAME}' - creating empty build archive"
   tar czf ${PROJECT_ROOT_PATH}/artifacts/build.tar.gz --files-from /dev/null
 fi
-tar czf ${PROJECT_ROOT_PATH}/artifacts/devel.tar.gz "devel"
+
+#ds ship complete devel folder with all libaries built so far (TODO make this clean)
+tar czf ${PROJECT_ROOT_PATH}/artifacts/devel.tar.gz "devel" --dereference
 ls -al "${PROJECT_ROOT_PATH}/artifacts/"
 echo -e "\e[1;96m--------------------------------------------------------------------------------\e[0m"
