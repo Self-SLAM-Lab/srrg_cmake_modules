@@ -40,6 +40,8 @@ else
   BRANCH_NAME="master"
 fi
 cd "/root/workspace/src/"
+echo -e "\e[1;96mcurrent workspace sources: \e[0m"
+ls -al
 
 #ds check if the commit hash of the available artifacts corresponds to the last push
 #ds if not, we won't be fetching the artifacts and instead perform a rebuild (otherwise we risk build inconsistencies)
