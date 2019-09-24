@@ -2,8 +2,8 @@
 
 #ds check input parameters
 if [ "$#" -ne 2 ]; then
-  echo "ERROR: call as $0 PROJECT_ROOT_PATH PROJECT_NAME";
-  exit 0;
+  echo "ERROR: call as $0 PROJECT_ROOT_PATH PROJECT_NAME"
+  exit -1
 fi
 
 #ds parameters

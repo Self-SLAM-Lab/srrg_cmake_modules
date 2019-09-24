@@ -8,8 +8,8 @@
 
 #ds check input parameters
 if [ "$#" -ne 4 ]; then
-  echo "ERROR: call as $0 PROJECT_NAME BRANCH_NAME JOB_NAME ACCESS_TOKEN";
-  exit 0;
+  echo "ERROR: call as $0 PROJECT_NAME BRANCH_NAME JOB_NAME ACCESS_TOKEN"
+  exit -1
 fi
 
 #ds start
@@ -68,7 +68,6 @@ rm artifacts.zip
 tar xzf artifacts/build.tar.gz
 tar xzf artifacts/devel.tar.gz
 rm -rf artifacts
-echo -e "\e[1;96m--------------------------------------------------------------------------------\e[0m"
 
 #ds blacklist the loaded project in catkin to disable rebuilding in any circumstances
 #ds we have to extend the previous blacklist since the command is not appending
@@ -79,3 +78,4 @@ else
 fi
 catkin config --blacklist $CATKIN_BLACKLIST
 export CATKIN_BLACKLIST
+echo -e "\e[1;96m--------------------------------------------------------------------------------\e[0m"

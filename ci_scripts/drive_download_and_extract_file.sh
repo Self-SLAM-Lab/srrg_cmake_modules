@@ -3,8 +3,8 @@
 
 #ds check input parameters
 if [ "$#" -ne 2 ]; then
-  echo "ERROR: call as $0 GOOGLE_DRIVE_ID TARGET_FOLDER";
-  exit 0;
+  echo "ERROR: call as $0 GOOGLE_DRIVE_ID TARGET_FOLDER"
+  exit -1
 fi
 echo -e "\e[1;96m--------------------------------------------------------------------------------\e[0m"
 echo -e "\e[1;96mbash version: ${BASH_VERSION}\e[0m"

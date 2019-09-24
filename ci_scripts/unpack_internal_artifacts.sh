@@ -7,8 +7,8 @@
 
 #ds check input parameters
 if [ "$#" -ne 1 ]; then
-  echo "ERROR: call as $0 PROJECT_ROOT_PATH";
-  exit 0;
+  echo "ERROR: call as $0 PROJECT_ROOT_PATH"
+  exit -1
 fi
 
 #ds start

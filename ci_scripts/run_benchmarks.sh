@@ -2,8 +2,8 @@
 
 #ds check input parameters
 if [ "$#" -ne 3 ]; then
-  echo "ERROR: call as $0 REPOSITORY_PATH WORKSPACE_PATH PROJECT_NAME";
-  exit 0;
+  echo "ERROR: call as $0 REPOSITORY_PATH WORKSPACE_PATH PROJECT_NAME"
+  exit -1
 fi
 
 #ds set parameters
