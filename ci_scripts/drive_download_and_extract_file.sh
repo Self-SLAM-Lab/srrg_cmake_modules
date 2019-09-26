@@ -22,8 +22,18 @@ FILENAME="$(curl -sc /tmp/gcokie "${GOOGLE_DRIVE_URL}&id=${GOOGLE_DRIVE_ID}" | g
 GET_CODE="$(awk '/_warning_/ {print $NF}' /tmp/gcokie)"  
 curl -Lb "/tmp/gcokie" "${GOOGLE_DRIVE_URL}&confirm=${GET_CODE}&id=${GOOGLE_DRIVE_ID}" -o "${FILENAME}"
 
-#ds extract file
-tar xzf "$FILENAME"
-rm "$FILENAME"
+#ds check if extraction is required
+if [[ $FILENAME == *".zip"* ]]; then
+  #ds extract zip file
+  echo -e "\e[1;96munzip ${FILENAME}\e[0m"
+  unzip "$FILENAME"
+  rm "$FILENAME"
+elif [[ $FILENAME == *".tar.gz"* ]]; then
+  #ds extract tarball
+  echo -e "\e[1;96mtar xzf ${FILENAME}\e[0m"
+  tar xzf "$FILENAME"
+  rm "$FILENAME"
+fi
+
 ls -al
 echo -e "\e[1;96m--------------------------------------------------------------------------------\e[0m"
