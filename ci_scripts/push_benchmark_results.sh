@@ -20,7 +20,7 @@ PROJECT_NAME="$1"
 COMMIT_MESSAGE="$2"
 
 #ds update reference commit - currently locked in executor
-cd "/home/srrg-07/source/srrg2/srrg2_executor"
+cd "/root/workspace/srrg2_executor"
 sed -i "s|${PROJECT_NAME}/commit/.*|${PROJECT_NAME}/commit/${CI_COMMIT_SHA}|g" "readme.md"
 git config --global user.email "benchamin@srrg.com"
 git config --global user.name "benchamin"
