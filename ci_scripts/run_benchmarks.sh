@@ -1,4 +1,6 @@
 #!/bin/bash
+#ds this script is intended to be sourced!
+#ds it assumes that all dataset resources have been downloaded in advance!
 
 #ds check input parameters
 if [ "$#" -ne 3 ]; then
