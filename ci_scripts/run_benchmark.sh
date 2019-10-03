@@ -51,10 +51,11 @@ if [ -z "$DATASET_DRIVE_ID" ]; then
 fi
 
 #ds download dataset into a temporary folder that corresponds to the drive ID
-source ${SRRG_SCRIPT_PATH}/drive_download_and_extract_file.sh "$DATASET_DRIVE_ID" "$DATASET_DRIVE_ID"
+mkdir -p "$DATASET_SEQUENCE_NAME"
+source ${SRRG_SCRIPT_PATH}/drive_download_and_extract_file.sh "$DATASET_DRIVE_ID" "$DATASET_SEQUENCE_NAME"
 
 #ds move into the extracted folder (exported variable by download script)
-EXTRACTED_FOLDER=($(ls ${DATASET_DRIVE_ID}))
+EXTRACTED_FOLDER=($(ls ${DATASET_SEQUENCE_NAME}))
 echo "EXTRACTED_FOLDER: '${EXTRACTED_FOLDER[0]}'"
 cd "${DATASET_DRIVE_ID}/${EXTRACTED_FOLDER[0]}"
 
@@ -72,5 +73,5 @@ fi
 #ds cleanup benchmark files
 ls -al
 cd "../.."
-rm -rf "$DATASET_DRIVE_ID"
+rm -rf "$DATASET_SEQUENCE_NAME"
 echo -e "\e[1;96m--------------------------------------------------------------------------------\e[0m"
