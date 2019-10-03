@@ -57,7 +57,7 @@ source ${SRRG_SCRIPT_PATH}/drive_download_and_extract_file.sh "$DATASET_DRIVE_ID
 #ds move into the extracted folder (exported variable by download script)
 EXTRACTED_FOLDER=($(ls ${DATASET_SEQUENCE_NAME}))
 echo "EXTRACTED_FOLDER: '${EXTRACTED_FOLDER[0]}'"
-cd "${DATASET_DRIVE_ID}/${EXTRACTED_FOLDER[0]}"
+cd "${DATASET_SEQUENCE_NAME}/${EXTRACTED_FOLDER[0]}"
 
 #ds run benchmark binary (absolute path must be provided)
 $($BENCHMARK_BINARY_ABSOLUTE_PATH)
