@@ -38,6 +38,13 @@ declare -A DATASET_SEQUENCES_AVAILABLE=(
 ["kitti_09"]="1DtGrqxS50stlUMpeOP-gUHdWFuPp4gZg"
 ["kitti_10"]="1-fQCLyr2IT7H-l_EXfQtJ8H9nRhr1lZD"
 ["icl_living_room_0"]="1HBEmz0qBxFUTrk1K4pJIUNPpJYhgMHYD"
+["icl_living_room_1"]="1kojNwhrWbdK3nR08M2vIUv66wW-NZHo1"
+["icl_living_room_2"]="1lJW4CcPiZmPOwJtMJR2kdfKc2sWtsJ_F"
+["icl_living_room_3"]="17CaZbEGhBUMFwxTJSv71yl6VNtMF7i9k"
+["icl_office_room_0"]="11_Ms0a9RVgjwEVQ88CzTzP_DOR7ZpbgR"
+["icl_office_room_1"]="156ULtiSmisW42kccWE43kjr55qkj7gbt"
+["icl_office_room_2"]="1Qnx4En3SnfaUCOfiiyu5DFpBywkoLdp7"
+["icl_office_room_3"]="1ENF8aKAi9z92T8Res0vlY7O-icBLUU_F"
 )
 
 #ds retrieve dataset (if available)
