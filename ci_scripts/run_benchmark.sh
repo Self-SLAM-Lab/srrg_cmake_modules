@@ -37,6 +37,7 @@ declare -A DATASET_SEQUENCES_AVAILABLE=(
 ["kitti_08"]="15lg3x3KNuPYMxowE38hWBZk8ch5SdfOI"
 ["kitti_09"]="1DtGrqxS50stlUMpeOP-gUHdWFuPp4gZg"
 ["kitti_10"]="1-fQCLyr2IT7H-l_EXfQtJ8H9nRhr1lZD"
+["icl_living_room_0"]="1HBEmz0qBxFUTrk1K4pJIUNPpJYhgMHYD"
 )
 
 #ds retrieve dataset (if available)
@@ -62,12 +63,18 @@ cd "${DATASET_SEQUENCE_NAME}/${EXTRACTED_FOLDER[0]}"
 #ds run benchmark binary (absolute path must be provided)
 $($BENCHMARK_BINARY_ABSOLUTE_PATH)
 
-#ds run visualization tools (if applicable) TODO map as well to support other result tools
-if [[ $DATASET_NAME == *"kitti"* ]]; then
+#ds run visualization tools (if applicable) TODO map as well to support other result tools more elegantly
+if [[ $DATASET_NAME == "kitti" ]]; then
+  echo "running KITTI evaluation tools"
   ${RESULT_TOOL_ABSOLUTE_PATH} -gt "gt.txt" -odom "trajectory.txt" -seq "${SEQUENCE_NAME}.txt"
   cp "results/plot_path/${SEQUENCE_NAME}.png" "${RESULT_PATH}/kitti/${SEQUENCE_NAME}/"
   cp "results/plot_error/${SEQUENCE_NAME}_tl.png" "${RESULT_PATH}/kitti/${SEQUENCE_NAME}/"
   cp "results/plot_error/${SEQUENCE_NAME}_rl.png" "${RESULT_PATH}/kitti/${SEQUENCE_NAME}/"
+fi
+if [[ $DATASET_NAME == "icl" ]]; then
+  echo "running ICL evaluation tools"
+  ${RESULT_TOOL_ABSOLUTE_PATH} "gt.txt" "trajectory.txt" --plot "trajectory_error.png"
+  cp "trajectory_error.png" "${RESULT_PATH}/icl/${SEQUENCE_NAME}/"
 fi
 
 #ds cleanup benchmark files
