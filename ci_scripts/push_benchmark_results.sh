@@ -19,8 +19,9 @@ echo -e "\e[1;96mbash version: ${BASH_VERSION}\e[0m"
 PROJECT_NAME="$1"
 COMMIT_MESSAGE="$2"
 
-#ds update reference commit - currently locked in executor
+#ds update reference commit - currently locked in executor TODO change
 cd "/root/workspace/srrg2_executor"
+git pull --rebase #ds someone might push while we're benching
 sed -i "s|${PROJECT_NAME}/commit/.*|${PROJECT_NAME}/commit/${CI_COMMIT_SHA}|g" "readme.md"
 git config --global user.email "benchamin@srrg.com"
 git config --global user.name "benchamin"
