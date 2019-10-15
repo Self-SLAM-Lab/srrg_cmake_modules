@@ -25,6 +25,7 @@ RESULT_TOOL_ABSOLUTE_PATH="$4"
 RESULT_PATH="$5"
 
 #ds known datasets (public) in a map <name, google drive id> ADD YOUR DATASET_SEQUENCE HERE
+#ds TODO move this list into a separate file
 declare -A DATASET_SEQUENCES_AVAILABLE=(
 ["kitti_00"]="1u_d4qp5p7eyWQk4zZhI8x13uEB_Ut7pC"
 ["kitti_01"]="1oPoczbCpXJyB_1lz7AsNqHu4NiWcqpkM"
@@ -45,6 +46,10 @@ declare -A DATASET_SEQUENCES_AVAILABLE=(
 ["icl_office_room_1"]="156ULtiSmisW42kccWE43kjr55qkj7gbt"
 ["icl_office_room_2"]="1Qnx4En3SnfaUCOfiiyu5DFpBywkoLdp7"
 ["icl_office_room_3"]="1ENF8aKAi9z92T8Res0vlY7O-icBLUU_F"
+["tum_fr1_room"]="1qPavF3iHuoeG7P_cVUUQ_nyXKE0miR-z"
+["tum_fr2_desk"]="1oE9VPUYcu5XLzFI15XnuyO-d6Ok_EttC"
+["tum_fr2_large_with_loop"]="16T5ObpdfqTjVah7WE1aAtQiRLOwPOyMd"
+["tum_fr3_long"]="16zdgsLWRiyLrDXokm9dp6w7I6ZE5Gqqv"
 )
 
 #ds retrieve dataset (if available)
