@@ -23,6 +23,7 @@ DATASET_NAME="$2"
 SEQUENCE_NAME="$3"
 RESULT_TOOL_ABSOLUTE_PATH="$4"
 RESULT_PATH="$5"
+LOCAL_DATASET_PATH="/datasets/" #ds TODO parametrize
 
 #ds known datasets (public) in a map <name, google drive id> ADD YOUR DATASET_SEQUENCE HERE
 #ds TODO move this list into a separate file
@@ -58,19 +59,69 @@ DATASET_DRIVE_ID=${DATASET_SEQUENCES_AVAILABLE[$DATASET_SEQUENCE_NAME]}
 echo "DATASET_DRIVE_ID: '${DATASET_DRIVE_ID}'"
 
 #ds if dataset download ID could not be retrieved, escape with failure
+#ds a file that is not available for download is also not available on disk
 if [ -z "$DATASET_DRIVE_ID" ]; then
   echo "dataset sequence with name: '${DATASET_SEQUENCE_NAME}' is not registered"
   exit -1
 fi
 
-#ds download dataset into a temporary folder that corresponds to the drive ID
+#ds create dataset folder
 mkdir -p "$DATASET_SEQUENCE_NAME"
-source ${SRRG_SCRIPT_PATH}/drive_download_and_extract_file.sh "$DATASET_DRIVE_ID" "$DATASET_SEQUENCE_NAME"
 
-#ds move into the extracted folder (exported variable by download script)
-EXTRACTED_FOLDER=($(ls ${DATASET_SEQUENCE_NAME}))
-echo "EXTRACTED_FOLDER: '${EXTRACTED_FOLDER[0]}'"
-cd "${DATASET_SEQUENCE_NAME}/${EXTRACTED_FOLDER[0]}"
+#ds check if the chosen sequence is provided locally
+echo -e "\e[1;96mavailable local datasets in '$LOCAL_DATASET_PATH':\e[0m"
+ls "$LOCAL_DATASET_PATH"
+
+#ds loop over all dataset names and check if one matches the requested dataset name
+LOCAL_DATASET_SEQUENCE_PATH=""
+AVAILABLE_DATASETS=($(ls $LOCAL_DATASET_PATH))
+for AVAILABLE_DATASET in "${AVAILABLE_DATASETS[@]}"
+  do
+    if [[ "$AVAILABLE_DATASET" == "$DATASET_NAME" ]]; then
+      echo -e "\e[1;96mfound matching dataset: '$AVAILABLE_DATASET' containing sequences:\e[0m"
+      ls "${LOCAL_DATASET_PATH}/${AVAILABLE_DATASET}"
+      AVAILABLE_SEQUENCES=($(ls ${LOCAL_DATASET_PATH}/${AVAILABLE_DATASET}))
+      for AVAILABLE_SEQUENCE in "${AVAILABLE_SEQUENCES[@]}"
+        do
+          if [[ "$AVAILABLE_SEQUENCE" == "$SEQUENCE_NAME" ]]; then
+            echo -e "\e[1;96mfound matching sequence: '$AVAILABLE_SEQUENCE' containing files:\e[0m"
+            LOCAL_DATASET_SEQUENCE_PATH="${LOCAL_DATASET_PATH}/${AVAILABLE_DATASET}/${AVAILABLE_SEQUENCE}"
+            ls "$LOCAL_DATASET_SEQUENCE_PATH"
+          fi
+      done
+    fi
+done
+
+#ds if we could not locate the dataset sequence on disk
+if [ -z "$LOCAL_DATASET_SEQUENCE_PATH" ]; then
+  echo -e "\e[1;96munable to locate matching dataset sequence - download required\e[0m"
+
+  #ds download dataset into a temporary folder that corresponds to the drive ID
+  source ${SRRG_SCRIPT_PATH}/drive_download_and_extract_file.sh "$DATASET_DRIVE_ID" "$DATASET_SEQUENCE_NAME"
+
+  #ds move into the extracted folder (exported variable by download script)
+  EXTRACTED_FOLDER=($(ls ${DATASET_SEQUENCE_NAME}))
+  echo "EXTRACTED_FOLDER: '${EXTRACTED_FOLDER[0]}'"
+  cd "${DATASET_SEQUENCE_NAME}/${EXTRACTED_FOLDER[0]}"
+else
+  echo -e "\e[1;96mfound dataset sequence '${LOCAL_DATASET_SEQUENCE_PATH}' - no download necessary!\e[0m"
+
+  #ds establish symlinks in target folder
+  echo -e "\e[1;96msetting up symlinks:\e[0m"
+  cd "${DATASET_SEQUENCE_NAME}"
+  ln -s "${LOCAL_DATASET_SEQUENCE_PATH}/binary/"
+  ln -s "${LOCAL_DATASET_SEQUENCE_PATH}/messages.json"
+  ln -s "${LOCAL_DATASET_SEQUENCE_PATH}/gt.txt"
+
+  #ds specific symlinks
+  if [[ $DATASET_NAME == "kitti" ]]; then
+    ln -s "${LOCAL_DATASET_SEQUENCE_PATH}/times.txt"
+    ln -s "${LOCAL_DATASET_SEQUENCE_PATH}/calib.txt"
+  fi
+
+  #ds list created links
+  ls -al
+fi
 
 #ds run benchmark binary (absolute path must be provided)
 $($BENCHMARK_BINARY_ABSOLUTE_PATH)
