@@ -12,6 +12,9 @@ PROJECT_NAME="$2"
 echo -e "\e[1;96m--------------------------------------------------------------------------------\e[0m"
 echo -e "\e[1;96mbash version: ${BASH_VERSION}\e[0m"
 
+#srrg avoid ros updating
+apt-mark hold ros-*
+
 #ds generic build dependencies (valid for ubuntu 16.04 and 18.04)
 apt-get update 
 apt-get upgrade -y
