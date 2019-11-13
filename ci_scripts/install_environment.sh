@@ -13,12 +13,12 @@ echo -e "\e[1;96m---------------------------------------------------------------
 echo -e "\e[1;96mbash version: ${BASH_VERSION}\e[0m"
 
 #srrg avoid ros updating
-apt-mark hold ros-*
+apt-mark hold ros-* > /dev/null
 
 #ds generic build dependencies (valid for ubuntu 16.04 and 18.04)
 apt update 
 apt upgrade -y
-apt install -y sudo ssh openssh-client git \
+apt install -y -q sudo ssh openssh-client git \
     python-catkin-tools build-essential libeigen3-dev \
     libsuitesparse-dev libgtest-dev
 
