@@ -17,7 +17,8 @@ apt-mark hold ros-* > /dev/null
 
 #ds generic build dependencies (valid for ubuntu 16.04 and 18.04)
 apt update 
-apt upgrade -y
+#mc disabling this temporally
+# apt upgrade -y
 apt install -y -q sudo ssh openssh-client git \
     python-catkin-tools build-essential libeigen3-dev \
     libsuitesparse-dev libgtest-dev
