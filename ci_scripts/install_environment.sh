@@ -16,14 +16,11 @@ echo -e "\e[1;96mbash version: ${BASH_VERSION}\e[0m"
 apt-mark hold ros-*
 
 #ds generic build dependencies (valid for ubuntu 16.04 and 18.04)
-apt-get update 
-apt-get upgrade -y
-apt-get install -y sudo ssh openssh-client git
-apt install python-catkin-tools -y
-apt install build-essential -y
-apt install libeigen3-dev -y
-apt install libsuitesparse-dev -y
-apt install libgtest-dev -y
+apt update 
+apt upgrade -y
+apt install -y sudo ssh openssh-client git \
+    python-catkin-tools build-essential libeigen3-dev \
+    libsuitesparse-dev libgtest-dev
 
 #ds create catkin workspace and link this repository for build with catkin
 mkdir -p /root/workspace/src
