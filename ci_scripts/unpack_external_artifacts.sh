@@ -36,7 +36,7 @@ if [[ $AVAILABLE_BRANCHES == *"origin/${BRANCH_NAME}"* ]]; then
   git checkout "$BRANCH_NAME"
 else
   #ds otherwise we stay on master (already checked out)
-  echo -e "\e[1;96mtarget BRANCH_NAME='${BRANCH_NAME}' not available, staying on 'master'\e[0m"
+  echo -e "\e[1;93mtarget BRANCH_NAME='${BRANCH_NAME}' not available, staying on 'master'\e[0m"
   BRANCH_NAME="master"
 fi
 cd "/root/workspace/src/"
