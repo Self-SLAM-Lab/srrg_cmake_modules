@@ -12,6 +12,12 @@ PROJECT_NAME="$2"
 echo -e "\e[1;96m--------------------------------------------------------------------------------\e[0m"
 echo -e "\e[1;96mbash version: ${BASH_VERSION}\e[0m"
 
+#ds check if required external variables are not set
+if [ -z "$SRRG_SCRIPT_PATH" ]; then
+  echo "environment variable SRRG_SCRIPT_PATH not set"
+  exit -1
+fi
+
 #srrg avoid ros updating
 apt-mark hold ros-* > /dev/null
 
@@ -23,21 +29,9 @@ apt install -y -qq sudo ssh openssh-client git \
     python-catkin-tools build-essential libeigen3-dev \
     libsuitesparse-dev libgtest-dev
 
-#ds create catkin workspace and link this repository for build with catkin
-mkdir -p /root/workspace/src
-ln -s "$PROJECT_DIRECTORY" "/root/workspace/src/${PROJECT_NAME}"
-
-#ds setup test data path (routed through source directory for local compatibility)
-mkdir -p /root/source/srrg && mkdir -p /root/source/srrg2
-ln -s "$PROJECT_DIRECTORY" "/root/source/srrg2/${PROJECT_NAME}"
-echo -e "\e[1;96m--------------------------------------------------------------------------------\e[0m"
+#ds set up catkin workspace
+source ${SRRG_SCRIPT_PATH}/install_catkin_workspace.sh ${PROJECT_DIRECTORY} ${PROJECT_NAME}
 
 #ds set up ssh with key that is required for private repository cloning TODO move
-eval $(ssh-agent -s)
-echo "$SSH_PRIVATE_KEY_FULL" | tr -d '\r' | ssh-add - > /dev/null
-mkdir -p ~/.ssh
-chmod 700 ~/.ssh
-ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
-chmod 644 ~/.ssh/known_hosts
-
+source ${SRRG_SCRIPT_PATH}/install_ssh.sh
 echo -e "\e[1;96m--------------------------------------------------------------------------------\e[0m"
