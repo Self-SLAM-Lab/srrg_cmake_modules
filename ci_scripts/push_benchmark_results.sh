@@ -41,8 +41,8 @@ if [[ $(git status) != *"nothing to commit, working tree clean"* ]]; then
   tail "readme.md"
 
   #ds push to remote without triggering it's ci
-  echo -e "\e[1;96mgit commit -am ${COMMIT_MESSAGE} [skip ci]\e[0m"
-  git commit -am "${COMMIT_MESSAGE} [skip ci]"
+  echo -e "\e[1;96mgit commit -am [automatic][benchmark][${PROJECT_NAME}] ${COMMIT_MESSAGE} [skip ci]\e[0m"
+  git commit -am "[automatic][benchmark][${PROJECT_NAME}] ${COMMIT_MESSAGE} [skip ci]"
 
   #ds push - can be ignored if there were no changes after pulling
   echo -e "\e[1;96mgit push origin master\e[0m"
