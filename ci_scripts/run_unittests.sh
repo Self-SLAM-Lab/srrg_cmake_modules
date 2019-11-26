@@ -13,8 +13,14 @@ REPOSITORY_PATH="$1"
 WORKSPACE_PATH="$2"
 PROJECT_NAME="$3"
 
-#ds compose test path and check if existing
+#ds compose test path and check if existing - with fallback for non-nested repositories
 TEST_BINARIES_PATH="${REPOSITORY_PATH}/${PROJECT_NAME}/tests"
+if [ ! -d "$TEST_BINARIES_PATH" ]; then
+  echo -e "\e[1;93mtest directory: $TEST_BINARIES_PATH is not existing - fallback to ${REPOSITORY_PATH}/tests\e[0m"
+  TEST_BINARIES_PATH="${REPOSITORY_PATH}/tests"
+fi
+
+#ds check if binary path is valid now
 if [ -d "$TEST_BINARIES_PATH" ]; then
   #ds parse test binaries from test path
   TEST_BINARIES=($(ls ${TEST_BINARIES_PATH}))
