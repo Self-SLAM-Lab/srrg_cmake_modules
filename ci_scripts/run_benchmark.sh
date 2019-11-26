@@ -126,7 +126,7 @@ fi
 #ds run benchmark binary (absolute path must be provided)
 $($BENCHMARK_BINARY_ABSOLUTE_PATH)
 
-#ds run visualization tools (if applicable) TODO map as well to support other result tools more elegantly
+#ds run visualization tools (if applicable) TODO map as well reduce this boilerplate code
 if [[ $DATASET_NAME == "kitti" ]]; then
   echo "running KITTI evaluation tools"
   ${RESULT_TOOL_ABSOLUTE_PATH} -gt "gt.txt" -odom "trajectory.txt" -seq "${SEQUENCE_NAME}.txt"
@@ -138,6 +138,16 @@ if [[ $DATASET_NAME == "icl" ]]; then
   echo "running ICL evaluation tools"
   ${RESULT_TOOL_ABSOLUTE_PATH} "gt.txt" "trajectory.txt" --plot "trajectory_error.png"
   cp "trajectory_error.png" "${RESULT_PATH}/icl/${SEQUENCE_NAME}/"
+fi
+if [[ $DATASET_NAME == "tum" ]]; then
+  echo "running TUM evaluation tools"
+  ${RESULT_TOOL_ABSOLUTE_PATH} "gt.txt" "trajectory.txt" --plot "trajectory_error.png"
+  cp "trajectory_error.png" "${RESULT_PATH}/tum/${SEQUENCE_NAME}/"
+fi
+if [[ $DATASET_NAME == "euroc" ]]; then
+  echo "running EuRoC evaluation tools"
+  ${RESULT_TOOL_ABSOLUTE_PATH} "gt.txt" "trajectory.txt" --plot "trajectory_error.png"
+  cp "trajectory_error.png" "${RESULT_PATH}/euroc/${SEQUENCE_NAME}/"
 fi
 
 #ds cleanup benchmark files
