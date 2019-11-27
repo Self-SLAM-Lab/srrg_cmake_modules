@@ -51,6 +51,10 @@ declare -A DATASET_SEQUENCES_AVAILABLE=(
 ["tum_fr2_desk"]="1oE9VPUYcu5XLzFI15XnuyO-d6Ok_EttC"
 ["tum_fr2_large_with_loop"]="16T5ObpdfqTjVah7WE1aAtQiRLOwPOyMd"
 ["tum_fr3_long"]="16zdgsLWRiyLrDXokm9dp6w7I6ZE5Gqqv"
+["euroc_mh_01"]="1g6_QudgZetukSTe6MwYxauaei_8n_lza"
+["euroc_mh_02"]="1XzSHNZtEnt67D9Twb_kOwuA-cSlgB7LE"
+["euroc_mh_03"]="1mG30GL0WvClVWpDxWkOtCwWvFgNcK3Bv"
+["euroc_mh_04"]="1ylbX7EdKkOVRl7CURBbgLcyo3ou1rS1E"
 )
 
 #ds retrieve dataset (if available)
