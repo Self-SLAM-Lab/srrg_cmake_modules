@@ -15,7 +15,8 @@ BRANCH_NAME="$2"
 JOB_NAME="$3"
 TOKEN="$4"
 
-cd /root/workspace/"$(catkin_find_pkg ${CI_PROJECT_NAME})" && pwd
+cd /root/workspace/
+cd "$(catkin_find_pkg ${CI_PROJECT_NAME})" && pwd
 
 SRRG_LIBS="$(catkin list --this --deps | awk '/build_depend/,/run_depend/{print $2}' | xargs -0 echo | awk '/srrg2/{print $0}' |  tac)"
 
