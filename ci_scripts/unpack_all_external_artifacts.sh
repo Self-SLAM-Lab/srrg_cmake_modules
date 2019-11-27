@@ -15,15 +15,14 @@ BRANCH_NAME="$2"
 JOB_NAME="$3"
 TOKEN="$4"
 
-cd "/root/workspace/src/$PROJECT_NAME" && pwd
+cd "/root/workspace/src/${PROJECT_NAME}" && pwd
 ls -l -a
-
-echo -e "catkin list --this --rdeps"
-echo -e "$(catkin list --this --rdeps)"
-echo -e "catkin list --this --rdeps | awk '/build_depend/,/run_depend/{print $2}'"
-echo -e "$(catkin list --this --rdeps | awk '/build_depend/,/run_depend/{print $2}')"
-
-SRRG_LIBS=`catkin list --this --rdeps | awk '/build_depend/,/run_depend/{print $2}' | xargs -0 echo | awk '/srrg2/{print $0}' |  tac`
+echo "catkin list --this --rdeps"
+echo "$(catkin list --this --rdeps)"
+echo "catkin list --this --rdeps | awk '/build_depend/,/run_depend/{print $2}'"
+echo "$(catkin list --this --rdeps | awk '/build_depend/,/run_depend/{print $2}')"
+echo "test"
+SRRG_LIBS="$(catkin list --this --rdeps | awk '/build_depend/,/run_depend/{print $2}' | xargs -0 echo | awk '/srrg2/{print $0}' |  tac`)"
 
 for LIB in $SRRG_LIBS;
   echo "Downloading $LIB artifacts";
