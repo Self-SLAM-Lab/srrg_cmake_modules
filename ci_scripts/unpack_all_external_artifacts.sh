@@ -16,11 +16,11 @@ JOB_NAME="$3"
 TOKEN="$4"
 
 cd "/root/workspace/src/$PROJECT_NAME"
-ls 
+ls
 echo "catkin list --this --rdeps"
-catkin list --this --rdeps
+echo "$(catkin list --this --rdeps)"
 echo "catkin list --this --rdeps | awk '/build_depend/,/run_depend/{print $2}'"
-catkin list --this --rdeps | awk '/build_depend/,/run_depend/{print $2}' 
+echo "$(catkin list --this --rdeps | awk '/build_depend/,/run_depend/{print $2}')"
 
 SRRG_LIBS=`catkin list --this --rdeps | awk '/build_depend/,/run_depend/{print $2}' | xargs -0 echo | awk '/srrg2/{print $0}' |  tac`
 
