@@ -39,6 +39,12 @@ else
   echo -e "\e[1;93mtarget BRANCH_NAME='${BRANCH_NAME}' not available, staying on 'master'\e[0m"
   BRANCH_NAME="master"
 fi
+
+#ds list last commit (for backtracking)
+echo -e "\e[1;96mlatest commit:\e[0m"
+git log -p -1
+
+#ds move to workspace
 cd "/root/workspace/src/"
 echo -e "\e[1;96mcurrent workspace sources: \e[0m"
 ls -al
