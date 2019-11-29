@@ -40,10 +40,6 @@ else
   BRANCH_NAME="master"
 fi
 
-#ds list last commit (for backtracking)
-echo -e "\e[1;96mlatest commit:\e[0m"
-git log -p -1
-
 #ds move to workspace
 cd "/root/workspace/src/"
 echo -e "\e[1;96mcurrent workspace sources: \e[0m"
@@ -56,6 +52,13 @@ LATEST_COMMIT_URL="https://gitlab.com/api/v4/projects/srrg-software%2F${PROJECT_
 COMMIT_STATUS=$(curl --header "PRIVATE-TOKEN: $TOKEN" "$LATEST_COMMIT_URL")
 if [[ $COMMIT_STATUS != *"\"status\":\"success\""* ]]; then
   echo -e "\e[1;93mcommit not successful - skipping artifact import\e[0m"
+#  if [ -z "$CATKIN_WHITELIST" ]; then
+#    CATKIN_WHITELIST="$PROJECT_NAME ${PROJECT_NAME}_ros"
+#  else
+#    CATKIN_WHITELIST="${CATKIN_WHITELIST} $PROJECT_NAME ${PROJECT_NAME}_ros"
+#  fi
+#  catkin config --whitelist $CATKIN_WHITELIST
+#  export CATKIN_WHITELIST
   return #ds statement has no effect if script is not sourced
   exit #ds escape in any case (skipped when sourcing, otherwise fatal)
 fi
