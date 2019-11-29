@@ -22,7 +22,12 @@ ls -al
 GTEST_LIBRARY_PATH=$(find "build/${PROJECT_NAME}" -name "libgtest.so")
 echo -e "\e[1;96mGTEST_LIBRARY_PATH='${GTEST_LIBRARY_PATH}'\e[0m"
 if [ ! -z "$GTEST_LIBRARY_PATH" ]; then
-  tar rzf ${PROJECT_ROOT_PATH}/artifacts/build.tar.gz "$GTEST_LIBRARY_PATH"
+  cd ${PROJECT_ROOT_PATH}/artifacts/
+  tar xzf build.tar.gz
+  rm build.tar.gz
+  GTEST_LIBRARY_PATH_PREVIOUS=$(find "build/" -name "libgtest.so")
+  cd "/root/workspace/"
+  tar czf ${PROJECT_ROOT_PATH}/artifacts/build.tar.gz "$GTEST_LIBRARY_PATH" "$GTEST_LIBRARY_PATH_PREVIOUS"
 fi
 #ds log available artifacts
 ls -al "${PROJECT_ROOT_PATH}/artifacts/"
