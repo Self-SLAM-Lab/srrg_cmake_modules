@@ -18,9 +18,18 @@ TOKEN="$4"
 cd /root/workspace/
 cd "$(catkin_find_pkg ${CI_PROJECT_NAME})" && pwd
 
-SRRG_LIBS="$(catkin list --this --deps | awk '/build_depend/,/run_depend/{print $2}' | xargs -0 echo | awk '/srrg2/{print $0}' |  tac)"
+mkdir -p devel
+mkdir -p build
+
+SRRG_DEPS="$(catkin list --this --deps | awk '/build_depend/,/run_depend/{print $2}' | xargs -0 echo | awk '/srrg2/{print $0}' |  tac)"
+SRRG_RDEPS="$(catkin list --this --rdeps | awk '/build_depend/,/run_depend/{print $2}' | xargs -0 echo | awk '/srrg2/{print $0}' |  tac)"
+echo "${SRRG_DEPS[@]}"
+echo "${SRRG_RDEPS[@]}"
+
+SRRG_LIBS=($(for v in "${SRRG_LIBS[@]}"; do echo "$v";done|uniq| xargs))
+echo "${SRRG_LIBS[@]}"
 
 for LIB in $SRRG_LIBS; do
-  echo "Downloading $LIB artifacts";
+  echo "\e[1;96mDownloading $LIB artifacts\e[0m";
   source ${SRRG_SCRIPT_PATH}/unpack_external_artifacts.sh "$LIB" "$BRANCH_NAME" "$JOB_NAME" "$TOKEN"
 done
