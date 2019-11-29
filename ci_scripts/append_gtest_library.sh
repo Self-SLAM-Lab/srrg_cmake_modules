@@ -23,7 +23,7 @@ GTEST_LIBRARY_PATH=$(find "build/${PROJECT_NAME}" -name "libgtest.so")
 echo -e "\e[1;96mGTEST_LIBRARY_PATH='${GTEST_LIBRARY_PATH}'\e[0m"
 if [ ! -z "$GTEST_LIBRARY_PATH" ]; then
   tar rzf ${PROJECT_ROOT_PATH}/artifacts/build.tar.gz "$GTEST_LIBRARY_PATH"
-
+fi
 #ds log available artifacts
 ls -al "${PROJECT_ROOT_PATH}/artifacts/"
 echo -e "\e[1;96m--------------------------------------------------------------------------------\e[0m"
