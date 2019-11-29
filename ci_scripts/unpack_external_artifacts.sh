@@ -74,8 +74,8 @@ rm artifacts.zip
 cd artifacts
 tar xzf build.tar.gz
 tar xzf devel.tar.gz
-cp -ru devel
-cp -ru build
+cp -ru devel ..
+cp -ru build ..
 cd ..
 rm -rf artifacts
 
