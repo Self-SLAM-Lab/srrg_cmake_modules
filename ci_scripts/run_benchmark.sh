@@ -55,6 +55,13 @@ declare -A DATASET_SEQUENCES_AVAILABLE=(
 ["euroc_mh_02"]="1XzSHNZtEnt67D9Twb_kOwuA-cSlgB7LE"
 ["euroc_mh_03"]="1mG30GL0WvClVWpDxWkOtCwWvFgNcK3Bv"
 ["euroc_mh_04"]="1ylbX7EdKkOVRl7CURBbgLcyo3ou1rS1E"
+["euroc_mh_05"]="10l5x4rXDy-wT6dKArQJj-ZIgtJYPPf4a"
+["euroc_v1_01"]="12eV1sR9CxSfsY1_aMoP8Qkh0Yu2LLzOB"
+["euroc_v1_02"]="1OX0VAU1GpTqSyEdissCDn-447Q1qZkU4"
+["euroc_v1_03"]="10KSoatF7z4tOZfW0zyPawJkMURMV7bKY"
+["euroc_v2_01"]="1RBZlWS4enKmH5hmfIGx-8AaWcrvYMXRB"
+["euroc_v2_02"]="1ZzuP_BqMGF86YlbKtUtz3M3W7v8WDSHr"
+["euroc_v2_03"]="1g8oymW8y0dN8cJlwUj-sBx4uYp9jKVIp"
 )
 
 #ds retrieve dataset (if available)
