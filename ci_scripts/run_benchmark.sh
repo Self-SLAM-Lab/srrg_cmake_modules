@@ -124,10 +124,13 @@ else
   ln -s "${LOCAL_DATASET_SEQUENCE_PATH}/messages.json"
   ln -s "${LOCAL_DATASET_SEQUENCE_PATH}/gt.txt"
 
-  #ds specific symlinks
+  #ds specific symlinks TODO blast once unified
   if [[ $DATASET_NAME == "kitti" ]]; then
     ln -s "${LOCAL_DATASET_SEQUENCE_PATH}/times.txt"
     ln -s "${LOCAL_DATASET_SEQUENCE_PATH}/calib.txt"
+  fi
+  if [[ $DATASET_NAME == "euroc" ]]; then
+    ln -s "${LOCAL_DATASET_SEQUENCE_PATH}/gt.csv"
   fi
 
   #ds list created links
