@@ -42,7 +42,7 @@ fi
 
 #ds list last commit (for backtracking)
 echo -e "\e[1;96mlatest commit:\e[0m"
-git log -p -1
+git log -q -1
 
 #ds move to workspace
 cd "/root/workspace/src/"
