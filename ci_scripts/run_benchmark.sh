@@ -62,6 +62,10 @@ declare -A DATASET_SEQUENCES_AVAILABLE=(
 ["euroc_v2_01"]="1RBZlWS4enKmH5hmfIGx-8AaWcrvYMXRB"
 ["euroc_v2_02"]="1ZzuP_BqMGF86YlbKtUtz3M3W7v8WDSHr"
 ["euroc_v2_03"]="1g8oymW8y0dN8cJlwUj-sBx4uYp9jKVIp"
+["malaga_01"]="14igPWcnSMduW_7X5A5KwJnO4hXwkMEwq"
+["malaga_02"]="1WpPS9GEeRJJ_fjjoALQdNd4gNpQEUU0a"
+["malaga_03"]="1sjLYtO4Bf7Brhh2_iQw3AERcLZ-y4P2Z"
+["malaga_04"]="1UtuUVkC3CUap8G6Lw-gca6yIebpzmqHJ"
 )
 
 #ds retrieve dataset (if available)
@@ -129,6 +133,9 @@ else
     ln -s "${LOCAL_DATASET_SEQUENCE_PATH}/times.txt"
     ln -s "${LOCAL_DATASET_SEQUENCE_PATH}/calib.txt"
   fi
+  if [[ $DATASET_NAME == "malaga" ]]; then
+    ln -s "${LOCAL_DATASET_SEQUENCE_PATH}/times.txt"
+  fi
   if [[ $DATASET_NAME == "euroc" ]]; then
     ln -s "${LOCAL_DATASET_SEQUENCE_PATH}/gt.csv"
   fi
@@ -162,6 +169,13 @@ if [[ $DATASET_NAME == "euroc" ]]; then
   echo "running EuRoC evaluation tools"
   ${RESULT_TOOL_ABSOLUTE_PATH} "gt.txt" "trajectory.txt" --plot "trajectory_error.png"
   cp "trajectory_error.png" "${RESULT_PATH}/euroc/${SEQUENCE_NAME}/"
+fi
+if [[ $DATASET_NAME == "malaga" ]]; then
+  echo "running Malaga evaluation tools"
+  ${RESULT_TOOL_ABSOLUTE_PATH} -gt "gt.txt" -odom "trajectory.txt" -seq "${SEQUENCE_NAME}.txt"
+  cp "results/plot_path/${SEQUENCE_NAME}.png" "${RESULT_PATH}/malaga/${SEQUENCE_NAME}/"
+  cp "results/plot_error/${SEQUENCE_NAME}_tl.png" "${RESULT_PATH}/malaga/${SEQUENCE_NAME}/"
+  cp "results/plot_error/${SEQUENCE_NAME}_rl.png" "${RESULT_PATH}/malaga/${SEQUENCE_NAME}/"
 fi
 
 #ds cleanup benchmark files
