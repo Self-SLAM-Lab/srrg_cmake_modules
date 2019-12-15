@@ -66,6 +66,10 @@ declare -A DATASET_SEQUENCES_AVAILABLE=(
 ["malaga_02"]="1WpPS9GEeRJJ_fjjoALQdNd4gNpQEUU0a"
 ["malaga_03"]="1sjLYtO4Bf7Brhh2_iQw3AERcLZ-y4P2Z"
 ["malaga_04"]="1UtuUVkC3CUap8G6Lw-gca6yIebpzmqHJ"
+["malaga_05"]="1bTpLfH1V0X9yiZn8eG-RMtQMjLruB2EV"
+["malaga_06"]="1PySxzqj1e3RP4nnSIvNpCXdeqg-C6-Zp"
+["malaga_07"]="1_lj7x4xdoMfX6ydDJBCzPhnXbIv_URyu"
+["malaga_08"]="1UkLUoasfBNvTshhKMAAjJcHUNQZfaZa0"
 )
 
 #ds retrieve dataset (if available)
