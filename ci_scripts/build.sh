@@ -18,7 +18,7 @@ cd "${BUILD_DIRECTORY}"
 CMAKE_BUILD_FLAGS="-j4 --no-status --summary -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}"
 
 #ds test build flags
-CMAKE_BUILD_TESTS_FLAGS="--catkin-make-args tests"
+CMAKE_BUILD_TESTS_FLAGS="-j4 --catkin-make-args tests"
 
 #ds choose build system (currently only catkin)
 BUILD_COMMAND="catkin build"
