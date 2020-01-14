@@ -16,8 +16,40 @@ JOB_NAME="$3"
 TOKEN="$4"
 
 cd /root/workspace/
-cd "$(catkin_find_pkg ${PROJECT_NAME})" && pwd
+function pull_repo() {
+    cd "/root/workspace/src/"
+    if $(git clone "git@gitlab.com:srrg-software/$1.git");then
+        create_tree $1
+        create_tree $1_ros
+    fi
+}
 
+declare -A deps_tree;
+layer=0
+function create_tree() {
+    echo $1
+    cd "$(catkin_find_pkg $1)"
+    pwd
+    echo "getting deps"
+    SRRG_DEPS="$(catkin list --this --deps | awk '/build_depend/,/run_depend/{print $2}' | xargs -0 echo | aw\
+k '/srrg2/{print $0}' |  tac)"
+    echo "${SRRG_DEPS[@]}"
+
+    for dep in $SRRG_DEPS; do
+        echo $dep
+        deps_tree[$dep]=$layer;
+        pull_repo "$dep"
+    done
+
+}
+deps_tree[$PROJECT_NAME]=0
+create_tree $PROJECT_NAME
+
+for a in "${!deps_tree[@]}"; do
+  echo $a ${deps_tree[$a]}
+done
+
+return
 mkdir -p devel
 mkdir -p build
 
