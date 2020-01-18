@@ -40,6 +40,10 @@ else
   BRANCH_NAME="master"
 fi
 
+#ds list last commit (for backtracking)
+echo -e "\e[1;96mlatest commit:\e[0m"
+git log -q -1
+
 #ds move to workspace
 cd "/root/workspace/src/"
 echo -e "\e[1;96mcurrent workspace sources: \e[0m"
