@@ -56,6 +56,13 @@ LATEST_COMMIT_URL="https://gitlab.com/api/v4/projects/srrg-software%2F${PROJECT_
 COMMIT_STATUS=$(curl --header "PRIVATE-TOKEN: $TOKEN" "$LATEST_COMMIT_URL")
 if [[ $COMMIT_STATUS != *"\"status\":\"success\""* ]]; then
   echo -e "\e[1;93mcommit not successful - skipping artifact import\e[0m"
+#  if [ -z "$CATKIN_WHITELIST" ]; then
+#    CATKIN_WHITELIST="$PROJECT_NAME ${PROJECT_NAME}_ros"
+#  else
+#    CATKIN_WHITELIST="${CATKIN_WHITELIST} $PROJECT_NAME ${PROJECT_NAME}_ros"
+#  fi
+#  catkin config --whitelist $CATKIN_WHITELIST
+#  export CATKIN_WHITELIST
   return #ds statement has no effect if script is not sourced
   exit #ds escape in any case (skipped when sourcing, otherwise fatal)
 fi
@@ -71,8 +78,12 @@ wget --no-verbose --header "PRIVATE-TOKEN: $TOKEN" "$ARTIFACT_DOWNLOAD_URL" --ou
 #ds unzip artifacts into corresponding folders and remove file containers
 unzip artifacts.zip
 rm artifacts.zip
-tar xzf artifacts/build.tar.gz
-tar xzf artifacts/devel.tar.gz
+cd artifacts
+tar xzf build.tar.gz
+tar xzf devel.tar.gz
+cp -ru devel ..
+cp -ru build ..
+cd ..
 rm -rf artifacts
 
 #ds blacklist the loaded project in catkin to disable rebuilding in any circumstances
