@@ -78,12 +78,8 @@ wget --no-verbose --header "PRIVATE-TOKEN: $TOKEN" "$ARTIFACT_DOWNLOAD_URL" --ou
 #ds unzip artifacts into corresponding folders and remove file containers
 unzip artifacts.zip
 rm artifacts.zip
-cd artifacts
-tar xzf build.tar.gz
-tar xzf devel.tar.gz
-cp -ru devel ..
-cp -ru build ..
-cd ..
+tar xzf artifacts/build.tar.gz
+tar xzf artifacts/devel.tar.gz
 rm -rf artifacts
 
 #ds blacklist the loaded project in catkin to disable rebuilding in any circumstances
