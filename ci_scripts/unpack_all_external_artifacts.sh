@@ -18,7 +18,7 @@ TOKEN="$4"
 cd /root/workspace/
 function pull_repo() {
     cd "/root/workspace/src/"
-    if $(git clone "git@gitlab.com:srrg-software/$1.git");then
+    if $(git clone -q "git@gitlab.com:srrg-software/$1.git");then
         create_tree $1
         create_tree $1_ros
     fi
@@ -29,10 +29,8 @@ layer=0
 function create_tree() {
     echo $1
     cd "$(catkin_find_pkg $1)"
-    pwd
     echo "getting deps"
-    locale SRRG_DEPS="$(catkin list --this --deps | awk '/build_depend/,/run_depend/{print $2}' | xargs -0 echo | aw\
-k '/srrg2/{print $0}' |  tac)"
+    locale SRRG_DEPS="$(catkin list --this --deps | awk '/build_depend/,/run_depend/{print $2}' | xargs -0 echo | awk '/srrg2/{print $0}' |  tac)"
     echo "${SRRG_DEPS[@]}"
 
     for dep in $SRRG_DEPS; do
@@ -50,13 +48,10 @@ done
 
 cd "$(catkin_find_pkg ${PROJECT_NAME})"
 
-SRRG_DEPS="$(catkin list --this --rdeps | awk '/build_de\
-pend/,/run_depend/{print $2}' | xargs -0 echo | awk '/sr\
-rg2/{print $0}' |  tac)"
+SRRG_DEPS="$(catkin list --this --rdeps | awk '/build_depend/,/run_depend/{print $2}' | xargs -0 echo | awk '/srrg2/{print $0}' |  tac)"
 echo "${SRRG_DEPS[@]}"
 
 for LIB in $SRRG_DEPS; do
     echo "\e[1;96mDownloading $LIB artifacts\e[0m";
-    source ${SRRG_SCRIPT_PATH}/unpack_external_artifacts\
-.sh "$LIB" "$BRANCH_NAME" "$JOB_NAME" "$TOKEN"
+    source ${SRRG_SCRIPT_PATH}/unpack_external_artifacts.sh "$LIB" "$BRANCH_NAME" "$JOB_NAME" "$TOKEN"
 done
