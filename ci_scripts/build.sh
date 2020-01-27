@@ -14,6 +14,8 @@ echo -e "\e[1;96m---------------------------------------------------------------
 echo -e "\e[1;96mrunning build.sh|bash version: '${BASH_VERSION}'\e[0m"
 cd "${BUILD_DIRECTORY}"
 
+catkin config
+
 #ds set complete cmake build flags
 CMAKE_BUILD_FLAGS="-j4 --no-status --summary -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_CXX_FLAGS=-fdiagnostics-color=always"
 
