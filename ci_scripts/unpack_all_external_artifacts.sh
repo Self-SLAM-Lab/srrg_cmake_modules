@@ -18,26 +18,27 @@ TOKEN="$4"
 cd /root/workspace/
 function clone_repo() {
     cd "/root/workspace/src/"
-    echo "check if $1 exists..."
     if [[ $(git ls-remote git@gitlab.com:srrg-software/$1.git) ]]; then
-      if [[ ! -d $1 && $(git clone -q git@gitlab.com:srrg-software/$1.git) ]];then
-          create_tree $1
-          create_tree $1_ros
+      if [[ -d $1 ]]; then
+        # echo -e "\e[1;92mrepo $1 already cloned\e[0m"
+        return 0;
       fi
+      git clone git@gitlab.com:srrg-software/$1.git
+      create_tree $1
+      create_tree $1_ros
     else
       echo -e "\e[1;93mrepo $1 does not exists in srrg-software group\e[0m"
     fi
 }
-
 function create_tree() {
     echo $1
     cd "$(catkin_find_pkg $1)"
-    #echo "getting deps"
-    SRRG_DEPS="$(catkin list --this --deps | awk '/build_depend/,/run_depend/{print $2}' | xargs -0 echo | awk '/srrg2/{print $0}' |  tac)"
-    #echo "${SRRG_DEPS[@]}"
+    echo "Deps for repo \e[1;96m$1\e[0m"
+    SRRG_DEPS="$(catkin list --this --deps | awk '/build_depend/,/run_depend/{print $2}' | xargs -0 echo | awk '/srrg2/{print $0}'\
+ |  tac)"
+    echo "${SRRG_DEPS[@]}"
 
     for dep in $SRRG_DEPS; do
-        echo $dep
         clone_repo "$dep"
     done
 }
@@ -45,10 +46,11 @@ create_tree $PROJECT_NAME
 
 cd "$(catkin_find_pkg ${PROJECT_NAME})"
 
-SRRG_RDEPS="$(catkin list --this --rdeps | awk '/build_depend/,/run_depend/{print $2}' | xargs -0 echo | awk '/srrg2/{print $0}' |  tac)"
+SRRG_RDEPS="$(catkin list --this --rdeps | awk '/build_depend/,/run_depend/{print $2}' | xargs -0 echo | awk '/srrg2/{print $0}' |\
+  tac)"
 echo "${SRRG_RDEPS[@]}"
 
 for LIB in $SRRG_RDEPS; do
-    echo "\e[1;96mDownloading $LIB artifacts\e[0m";
+    echo -e "\e[1;96mDownloading $LIB artifacts\e[0m";
     source ${SRRG_SCRIPT_PATH}/unpack_external_artifacts.sh "$LIB" "$BRANCH_NAME" "$JOB_NAME" "$TOKEN"
 done
