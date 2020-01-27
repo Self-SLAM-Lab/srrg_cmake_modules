@@ -18,7 +18,10 @@ TOKEN="$4"
 cd /root/workspace/
 function clone_repo() {
     cd "/root/workspace/src/"
-    git ls-remote git@gitlab.com:srrg-software/$1.git
+    echo "check if $1 exists..."
+    if [[ ! $(git ls-remote git@gitlab.com:srrg-software/$1.git) ]]; then
+      return 0
+    fi
     if [[ $? -eq 0 ]]; then
       if [[ ! -d $1 && $(git clone -q git@gitlab.com:srrg-software/$1.git) ]];then
           create_tree $1
