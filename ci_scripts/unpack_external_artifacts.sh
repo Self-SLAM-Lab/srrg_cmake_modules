@@ -22,7 +22,9 @@ TOKEN="$4"
 
 #ds clone project to catkin source folder (requires SSH key to be properly set up)
 cd "/root/workspace/src/"
-git clone "git@gitlab.com:srrg-software/${PROJECT_NAME}.git"
+if [[ ! -d ${PROJECT_NAME} ]]; then
+  git clone "git@gitlab.com:srrg-software/${PROJECT_NAME}.git"
+fi
 
 #ds check if selected branch is available
 cd "$PROJECT_NAME"
