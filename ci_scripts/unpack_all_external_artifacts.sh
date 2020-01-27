@@ -20,7 +20,7 @@ function clone_repo() {
   cd "/root/workspace/src/"
   if [[ $(git ls-remote git@gitlab.com:srrg-software/$1.git) ]]; then
     if [[ -d $1 ]]; then
-      # echo -e "\e[1;92mrepo $1 already cloned\e[0m"
+      echo -e "\e[1;92mrepo $1 already cloned\e[0m"
       return 0;
     fi
     git clone git@gitlab.com:srrg-software/$1.git
@@ -32,10 +32,13 @@ function clone_repo() {
 }
 function create_tree() {
   echo -e "Deps for repo \e[1;96m$1\e[0m"
-  command cd "$(catkin_find_pkg $1)"
-  if [[ $? -ne 0 ]]; then
+  if [[ ! "$(catkin_find_pkg $1)" ]]; then
+    echo -e "\e[1;93mcatkin package $1 not found\e[0m"
     return 0;
   fi
+  PACK_DIR="$(catkin_find_pkg $1)"
+  echo -e "found catkin package $1 in ${PACK_DIR}"
+  cd "${PACK_DIR}"
   SRRG_DEPS="$(catkin list --this --deps | awk '/build_depend/,/run_depend/{print $2}' | xargs -0 echo | awk '/srrg2/{print $0}'\
   |  tac)"
   echo " - ${SRRG_DEPS[@]}"
@@ -50,8 +53,9 @@ cd "$(catkin_find_pkg ${PROJECT_NAME})"
 
 SRRG_RDEPS="$(catkin list --this --rdeps | awk '/build_depend/,/run_depend/{print $2}' | xargs -0 echo | awk '/srrg2/{print $0}' |\
 tac)"
+echo "Recursive dependencies: "
 echo "${SRRG_RDEPS[@]}"
-
+echo ""
 for LIB in $SRRG_RDEPS; do
   echo -e "\e[1;96mDownloading $LIB artifacts\e[0m";
   source ${SRRG_SCRIPT_PATH}/unpack_external_artifacts.sh "$LIB" "$BRANCH_NAME" "$JOB_NAME" "$TOKEN"
