@@ -16,6 +16,7 @@ JOB_NAME="$3"
 FALLBACK_BRANCH="$4"
 
 cd /root/workspace/
+
 function clone_repo() {
   cd "/root/workspace/src/"
   if [[ "$(catkin_find_pkg $1)" ]]; then
@@ -48,6 +49,8 @@ function create_tree() {
   done
 }
 create_tree $PROJECT_NAME
+
+cd /root/workspace/
 
 cd "$(catkin_find_pkg ${PROJECT_NAME})"
 
