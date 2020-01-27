@@ -30,7 +30,7 @@ function create_tree() {
     echo $1
     cd "$(catkin_find_pkg $1)"
     echo "getting deps"
-    locale SRRG_DEPS="$(catkin list --this --deps | awk '/build_depend/,/run_depend/{print $2}' | xargs -0 echo | awk '/srrg2/{print $0}' |  tac)"
+    SRRG_DEPS="$(catkin list --this --deps | awk '/build_depend/,/run_depend/{print $2}' | xargs -0 echo | awk '/srrg2/{print $0}' |  tac)"
     echo "${SRRG_DEPS[@]}"
 
     for dep in $SRRG_DEPS; do
@@ -48,10 +48,10 @@ done
 
 cd "$(catkin_find_pkg ${PROJECT_NAME})"
 
-SRRG_DEPS="$(catkin list --this --rdeps | awk '/build_depend/,/run_depend/{print $2}' | xargs -0 echo | awk '/srrg2/{print $0}' |  tac)"
-echo "${SRRG_DEPS[@]}"
+SRRG_RDEPS="$(catkin list --this --rdeps | awk '/build_depend/,/run_depend/{print $2}' | xargs -0 echo | awk '/srrg2/{print $0}' |  tac)"
+echo "${SRRG_RDEPS[@]}"
 
-for LIB in $SRRG_DEPS; do
+for LIB in $SRRG_RDEPS; do
     echo "\e[1;96mDownloading $LIB artifacts\e[0m";
     source ${SRRG_SCRIPT_PATH}/unpack_external_artifacts.sh "$LIB" "$BRANCH_NAME" "$JOB_NAME" "$TOKEN"
 done
