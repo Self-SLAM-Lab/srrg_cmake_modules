@@ -23,7 +23,9 @@ TOKEN="$4"
 #ds clone project to catkin source folder (requires SSH key to be properly set up)
 cd "/root/workspace/src/"
 if [[ $(git ls-remote git@gitlab.com:srrg-software/$1.git) ]]; then
-  echo -e "\e[1;96mrepo $1 does not exists in srrg-software group\e[0m"
+  true
+else
+  echo -e "\e[1;93mrepo $1 does not exists in srrg-software group\e[0m"
   return 0
 fi
 if [[ ! -d ${PROJECT_NAME} ]]; then

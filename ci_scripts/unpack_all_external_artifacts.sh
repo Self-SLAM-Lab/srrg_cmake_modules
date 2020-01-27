@@ -25,7 +25,7 @@ function clone_repo() {
           create_tree $1_ros
       fi
     else
-      echo -e "\e[1;96mrepo $1 does not exists in srrg-software group\e[0m"
+      echo -e "\e[1;93mrepo $1 does not exists in srrg-software group\e[0m"
     fi
 }
 
