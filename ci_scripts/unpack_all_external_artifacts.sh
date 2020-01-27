@@ -18,11 +18,11 @@ TOKEN="$4"
 cd /root/workspace/
 function clone_repo() {
   cd "/root/workspace/src/"
+  if [[ "$(catkin_find_pkg $1)" ]]; then
+    echo -e "\e[1;92mrepo $1 already cloned\e[0m"
+    return 0;
+  fi
   if [[ $(git ls-remote git@gitlab.com:srrg-software/$1.git) ]]; then
-    if [[ -d $1 ]]; then
-      echo -e "\e[1;92mrepo $1 already cloned\e[0m"
-      return 0;
-    fi
     git clone git@gitlab.com:srrg-software/$1.git
     create_tree $1
     create_tree $1_ros
