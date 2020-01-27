@@ -21,6 +21,10 @@ JOB_NAME="$3"
 FALLBACK_BRANCH="$4"
 TOKEN="$ARTIFACT_PRIVATE_TOKEN"
 
+echo -e "\e[1;96mPROJECT_NAME: ${PROJECT_NAME}\e[0m"
+echo -e "\e[1;96mBRANCH_NAME: ${BRANCH_NAME}\e[0m"
+echo -e "\e[1;96mJOB_NAME: ${JOB_NAME}\e[0m"
+
 #ds clone project to catkin source folder (requires SSH key to be properly set up)
 cd "/root/workspace/src/"
 if [[ "$(catkin_find_pkg $PROJECT_NAME)" ]]; then
