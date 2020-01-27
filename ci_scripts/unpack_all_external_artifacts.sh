@@ -19,13 +19,13 @@ cd /root/workspace/
 function clone_repo() {
     cd "/root/workspace/src/"
     echo "check if $1 exists..."
-    if [[ ! $(git ls-remote git@gitlab.com:srrg-software/$1.git  > /dev/null 2>&1) ]]; then
-      echo "repo $1 does not exists in srrg-software group"
-      return 0
-    fi
-    if [[ ! -d $1 && $(git clone -q git@gitlab.com:srrg-software/$1.git) ]];then
-        create_tree $1
-        create_tree $1_ros
+    if [[ $(git ls-remote git@gitlab.com:srrg-software/$1.git) ]]; then
+      if [[ ! -d $1 && $(git clone -q git@gitlab.com:srrg-software/$1.git) ]];then
+          create_tree $1
+          create_tree $1_ros
+      fi
+    else
+      echo -e "\e[1;96mrepo $1 does not exists in srrg-software group\e[0m"
     fi
 }
 
