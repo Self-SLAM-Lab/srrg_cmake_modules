@@ -7,8 +7,8 @@
 #https://networkinferno.net/token-access-to-files-from-private-repo-in-gitlab
 
 #ds check input parameters
-if [ "$#" -ne 4 ]; then
-  echo "ERROR: call as $0 PROJECT_NAME BRANCH_NAME JOB_NAME ACCESS_TOKEN"
+if [[ "$#" < 3 ]]; then
+  echo "ERROR: call as $0 PROJECT_NAME BRANCH_NAME JOB_NAME [FALLBACK_BRANCH]"
   exit -1
 fi
 
@@ -18,23 +18,20 @@ echo -e "\e[1;96mbash version: ${BASH_VERSION}\e[0m"
 PROJECT_NAME="$1"
 BRANCH_NAME="$2"
 JOB_NAME="$3"
-TOKEN="$4"
+FALLBACK_BRANCH="$4"
+TOKEN="$ARTIFACT_PRIVATE_TOKEN"
 
 #ds clone project to catkin source folder (requires SSH key to be properly set up)
 cd "/root/workspace/src/"
-if [[ $(git ls-remote git@gitlab.com:srrg-software/$1.git) ]]; then
-  true
-else
-  echo -e "\e[1;93mrepo $1 does not exists in srrg-software group\e[0m"
-  return 0
-fi
-if [[ ! -d ${PROJECT_NAME} ]]; then
-  git clone "git@gitlab.com:srrg-software/${PROJECT_NAME}.git"
+if [[ "$(catkin_find_pkg $PROJECT_NAME)" ]]; then
+  echo -e "\e[1;92mrepo $PROJECT_NAME already cloned\e[0m"
+elif [[ $(git ls-remote git@gitlab.com:srrg-software/$1.git) ]]; then
+  git clone git@gitlab.com:srrg-software/$1.git
 fi
 
 
 #ds check if selected branch is available
-cd "$PROJECT_NAME"
+cd "$(catkin_find_pkg $PROJECT_NAME)"
 AVAILABLE_BRANCHES=$(git branch -r)
 echo -e "\e[1;96mavailable branches in ${PROJECT_NAME}: \e[0m"
 echo "$AVAILABLE_BRANCHES"
@@ -43,10 +40,15 @@ echo "$AVAILABLE_BRANCHES"
 if [[ $AVAILABLE_BRANCHES == *"origin/${BRANCH_NAME}"* ]]; then
   #ds check out the corresponding branch
   git checkout "$BRANCH_NAME"
+elif [[ -n ${FALLBACK_BRANCH} && $AVAILABLE_BRANCHES == *"origin/${FALLBACK_BRANCH}"* ]]; then
+  #ds check out the corresponding branch
+  BRANCH_NAME="${FALLBACK_BRANCH}"
+  git checkout "${BRANCH_NAME}"
 else
   #ds otherwise we stay on master (already checked out)
   echo -e "\e[1;93mtarget BRANCH_NAME='${BRANCH_NAME}' not available, staying on 'master'\e[0m"
   BRANCH_NAME="master"
+  git checkout "${BRANCH_NAME}"
 fi
 
 #ds list last commit (for backtracking)
