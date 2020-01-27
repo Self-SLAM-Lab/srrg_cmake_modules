@@ -18,10 +18,14 @@ TOKEN="$4"
 cd /root/workspace/
 function clone_repo() {
     cd "/root/workspace/src/"
-    if [[ ! -d $1 && $(git clone -q git@gitlab.com:srrg-software/$1.git) ]];then
-        create_tree $1
-        create_tree $1_ros
+    git ls-remote git@gitlab.com:srrg-software/$1.git > /dev/null 2>&1
+    if [[ $? -eq 0 ]]; then
+      if [[ ! -d $1 && $(git clone -q git@gitlab.com:srrg-software/$1.git) ]];then
+          create_tree $1
+          create_tree $1_ros
+      fi
     fi
+
 }
 
 function create_tree() {
