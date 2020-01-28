@@ -71,6 +71,7 @@ LATEST_COMMIT_URL="https://gitlab.com/api/v4/projects/srrg-software%2F${PROJECT_
 COMMIT_STATUS=$(curl --header "PRIVATE-TOKEN: $TOKEN" "$LATEST_COMMIT_URL")
 if [[ $COMMIT_STATUS != *"\"status\":\"success\""* ]]; then
   echo -e "\e[1;93mcommit not successful - skipping artifact import\e[0m"
+  echo -e "$COMMIT_STATUS"
 #  if [ -z "$CATKIN_WHITELIST" ]; then
 #    CATKIN_WHITELIST="$PROJECT_NAME ${PROJECT_NAME}_ros"
 #  else
