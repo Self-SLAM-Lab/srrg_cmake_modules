@@ -45,8 +45,8 @@ if [[ $(git status) != *"nothing to commit, working tree clean"* ]]; then
   git commit -am "[automatic][benchmark][${PROJECT_NAME}] ${COMMIT_MESSAGE} [skip ci]"
 
   #ds push - can be ignored if there were no changes after pulling
-  echo -e "\e[1;96mgit push origin master\e[0m"
-  git push origin master
+  echo -e "\e[1;96mgit push origin devel\e[0m"
+  git push origin devel
 else
   #ds ignore push
   echo -e "\e[1;96mbenchmark results have not changed - ignoring commit and push\e[0m"
