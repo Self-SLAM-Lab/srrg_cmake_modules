@@ -22,7 +22,8 @@ tar xzf "${PROJECT_ROOT_PATH}/artifacts/build.tar.gz"
 tar xzf "${PROJECT_ROOT_PATH}/artifacts/devel.tar.gz"
 
 #srrg import external artifacts TODO pass this values as arguments
-source ${SRRG_SCRIPT_PATH}/unpack_all_external_artifacts.sh $CI_PROJECT_NAME $CI_BUILD_REF_NAME $CI_JOB_NAME
+JOB_NAME="$(echo "${CI_JOB_NAME}" | sed 's/test/build/')"
+source ${SRRG_SCRIPT_PATH}/unpack_all_external_artifacts.sh $CI_PROJECT_NAME $CI_BUILD_REF_NAME $JOB_NAME
 
 ls -al
 echo -e "\e[1;96m--------------------------------------------------------------------------------\e[0m"
