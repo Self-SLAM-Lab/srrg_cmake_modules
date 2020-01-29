@@ -36,6 +36,13 @@ tar czf ${PROJECT_ROOT_PATH}/artifacts/devel.tar.gz devel/${PROJECT_NAME}* --der
 #ds wrap up the (catkin) build logs as well for external access
 tar czf ${PROJECT_ROOT_PATH}/artifacts/logs.tar.gz "logs"
 
+if [ ! -z "$GTEST_LIBRARY_PATH" ]; then
+  tar czf ${PROJECT_ROOT_PATH}/artifacts/internal.tar.gz "devel" "$GTEST_LIBRARY_PATH" --dereference
+else
+  echo "no tests found for project: '${PROJECT_NAME}' - creating empty build archive"
+  tar czf ${PROJECT_ROOT_PATH}/artifacts/internal.tar.gz  "devel" --dereference
+fi
+
 #ds log available artifacts
 ls -al "${PROJECT_ROOT_PATH}/artifacts/"
 echo -e "\e[1;96m--------------------------------------------------------------------------------\e[0m"
