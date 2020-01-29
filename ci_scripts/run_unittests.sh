@@ -35,11 +35,14 @@ if [ -d "$TEST_BINARIES_PATH" ]; then
     TEST_BINARY_FILE_TYPE=${TEST_BINARY:${#TEST_BINARY}-4:4}
     if [ ${TEST_BINARY_PREFIX} == "test" ] && [ ${TEST_BINARY_FILE_TYPE} == ".cpp" ]; then
       echo ""
-      echo -e "\e[1;96m${WORKSPACE_PATH}/${PROJECT_NAME}/${TEST_BINARY:0:${#TEST_BINARY}-4}\e[0m"
-  	  ${WORKSPACE_PATH}/${PROJECT_NAME}/${TEST_BINARY:0:${#TEST_BINARY}-4}
+      TEXT_EXE="${WS}/devel/${PROJECT_NAME}/lib/${PROJECT_NAME}/${TEST_BINARY:0:${#TEST_BINARY}-4}"
+      echo -e "\e[1;96m${TEXT_EXE}\e[0m"
+      ${TEXT_EXE}
+      #echo -e "\e[1;96m${WORKSPACE_PATH}/${PROJECT_NAME}/${TEST_BINARY:0:${#TEST_BINARY}-4}\e[0m"
+  	  #${WORKSPACE_PATH}/${PROJECT_NAME}/${TEST_BINARY:0:${#TEST_BINARY}-4}
   	fi
   done
-else 
+else
   echo -e "\e[1;93mtest directory: $TEST_BINARIES_PATH is not existing - skipping tests (confirm if running this stage is necessary!)\e[0m"
 fi
 echo -e "\e[1;96m--------------------------------------------------------------------------------\e[0m"

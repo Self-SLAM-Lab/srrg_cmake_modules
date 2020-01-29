@@ -20,5 +20,5 @@ ln -s "$PROJECT_DIRECTORY" "/root/workspace/src/${PROJECT_NAME}"
 mkdir -p /root/source/srrg && mkdir -p /root/source/srrg2
 ln -s "$PROJECT_DIRECTORY" "/root/source/srrg2/${PROJECT_NAME}"
 
-catkin init -w /root/workspace
+catkin config -w /root/workspace --init --isolate-devel
 echo -e "\e[1;96m--------------------------------------------------------------------------------\e[0m"

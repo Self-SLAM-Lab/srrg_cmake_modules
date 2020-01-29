@@ -33,4 +33,10 @@ ${BUILD_COMMAND} ${PROJECT_NAME} ${CMAKE_BUILD_FLAGS}
 echo "${BUILD_COMMAND} ${PROJECT_NAME} ${CMAKE_BUILD_FLAGS} ${CMAKE_BUILD_TESTS_FLAGS}"
 ${BUILD_COMMAND} ${PROJECT_NAME} ${CMAKE_BUILD_FLAGS} ${CMAKE_BUILD_TESTS_FLAGS}
 
+DEVEL_SPACE="${BUILD_DIRECTORY}devel"
+for LIB in ${SRRG_RDEPS}; do
+  echo ". ${DEVEL_SPACE}/${LIB}/setup.sh" >> "${DEVEL_SPACE}/setup.sh"; 
+done
+
+
 echo -e "\e[1;96m--------------------------------------------------------------------------------\e[0m"

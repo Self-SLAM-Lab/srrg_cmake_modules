@@ -31,7 +31,7 @@ else
 fi
 
 #ds ship complete devel folder with all libaries built so far (TODO make this clean)
-tar czf ${PROJECT_ROOT_PATH}/artifacts/devel.tar.gz "devel" --dereference
+tar czf ${PROJECT_ROOT_PATH}/artifacts/devel.tar.gz "devel/${PROJECT_NAME}*" --dereference
 
 #ds wrap up the (catkin) build logs as well for external access
 tar czf ${PROJECT_ROOT_PATH}/artifacts/logs.tar.gz "logs"
