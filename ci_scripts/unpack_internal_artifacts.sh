@@ -29,6 +29,7 @@ elif [[ $CI_JOB_NAME == *benchmark* ]]; then
   JOB_NAME="$(echo "${CI_JOB_NAME}" | sed 's/benchmark/build/')"
 fi
 
+JOB_NAME=$(python -c "job='${JOB_NAME}';print(job.replace(job[len('build'):job.find('_ubuntu')], ''))")
 source ${SRRG_SCRIPT_PATH}/unpack_all_external_artifacts.sh $CI_PROJECT_NAME $CI_BUILD_REF_NAME $JOB_NAME
 
 ls -al
