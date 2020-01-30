@@ -31,11 +31,16 @@ if [ -d "$EXECUTABLES_PATH" ]; then
     EXECUTABLE_FILE_TYPE=${EXECUTABLE:${#EXECUTABLE}-4:4}
     if [ ${EXECUTABLE_PREFIX} == "benchmark" ] && [ ${EXECUTABLE_FILE_TYPE} == ".cpp" ]; then
       echo ""
-      echo -e "\e[1;96m${WORKSPACE_PATH}/${PROJECT_NAME}/${EXECUTABLE:0:${#EXECUTABLE}-4}\e[0m"
-  	  ${WORKSPACE_PATH}/${PROJECT_NAME}/${EXECUTABLE:0:${#EXECUTABLE}-4}
+      TEXT_EXE="${WS}/devel/${PROJECT_NAME}/lib/${PROJECT_NAME}/${EXECUTABLE:0:${#EXECUTABLE}-4}"
+      echo -e "\e[1;96m${TEXT_EXE}\e[0m"
+      ${TEXT_EXE}
+
+      # echo ""
+      # echo -e "\e[1;96m${WORKSPACE_PATH}/${PROJECT_NAME}/${EXECUTABLE:0:${#EXECUTABLE}-4}\e[0m"
+  	  # ${WORKSPACE_PATH}/${PROJECT_NAME}/${EXECUTABLE:0:${#EXECUTABLE}-4}
   	fi
   done
-else 
+else
   echo -e "\e[1;93mbenchmark directory: $EXECUTABLES_PATH is not existing - skipping benchmarks (confirm if running this stage is necessary!)\e[0m"
 fi
 echo -e "\e[1;96m--------------------------------------------------------------------------------\e[0m"
