@@ -38,7 +38,7 @@ if [ -d "$EXECUTABLES_PATH" ]; then
     EXECUTABLE_PREFIX=${EXECUTABLE:0:9}
     EXECUTABLE_FILE_TYPE=${EXECUTABLE:${#EXECUTABLE}-4:4}
     if [ ${EXECUTABLE_PREFIX} == "benchmark" ] && [ ${EXECUTABLE_FILE_TYPE} == ".cpp" ]; then
-      ${SRRG_SCRIPT_PATH}/run_executable.sh ${PROJECT_NAME} ${EXECUTABLE:0:${#EXECUTABLE}-4} ${WORKSPACE_PATH}
+      source ${SRRG_SCRIPT_PATH}/run_executable.sh ${PROJECT_NAME} ${EXECUTABLE:0:${#EXECUTABLE}-4} ${WORKSPACE_PATH}
 
       # echo ""
       # TEXT_EXE="${WS}/devel/${PROJECT_NAME}/lib/${PROJECT_NAME}/${EXECUTABLE:0:${#EXECUTABLE}-4}"

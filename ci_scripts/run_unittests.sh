@@ -42,7 +42,7 @@ if [ -d "$TEST_BINARIES_PATH" ]; then
     TEST_BINARY_PREFIX=${TEST_BINARY:0:4}
     TEST_BINARY_FILE_TYPE=${TEST_BINARY:${#TEST_BINARY}-4:4}
     if [ ${TEST_BINARY_PREFIX} == "test" ] && [ ${TEST_BINARY_FILE_TYPE} == ".cpp" ]; then
-      ${SRRG_SCRIPT_PATH}/run_executable.sh ${PROJECT_NAME} ${TEST_BINARY:0:${#TEST_BINARY}-4} ${WORKSPACE_PATH}
+      source ${SRRG_SCRIPT_PATH}/run_executable.sh ${PROJECT_NAME} ${TEST_BINARY:0:${#TEST_BINARY}-4} ${WORKSPACE_PATH}
       # echo ""
       # TEXT_EXE="${WORKSPACE_PATH}/devel/${PROJECT_NAME}/lib/${PROJECT_NAME}/${TEST_BINARY:0:${#TEST_BINARY}-4}"
       # echo -e "\e[1;96m${TEXT_EXE}\e[0m"
