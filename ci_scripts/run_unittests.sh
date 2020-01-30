@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #ds check input parameters
-if [ "$#" -ne 3 ]; then
-  echo "ERROR: call as $0 REPOSITORY_PATH WORKSPACE_PATH PROJECT_NAME"
+if [ "$#" -lt 2 ]; then
+  echo "ERROR: call as $0 REPOSITORY_PATH PROJECT_NAME [WORKSPACE_PATH]"
   exit -1
 fi
 
@@ -10,8 +10,16 @@ fi
 echo -e "\e[1;96m--------------------------------------------------------------------------------\e[0m"
 echo -e "\e[1;96mbash version: ${BASH_VERSION}\e[0m"
 REPOSITORY_PATH="$1"
-WORKSPACE_PATH="$2"
-PROJECT_NAME="$3"
+PROJECT_NAME="$2"
+WORKSPACE_PATH="$3"
+if [[ -z ${WORKSPACE_PATH} ]]; then
+  WORKSPACE_PATH=${WS}
+fi
+
+if [[ -z ${SRRG_SCRIPT_PATH} ]]; then
+  echo -e "\e[1;91mSRRG_SCRIPT_PATH not set\e[0m"
+  exit -1
+fi
 
 #ds compose test path and check if existing - with fallback for non-nested repositories
 TEST_BINARIES_PATH="${REPOSITORY_PATH}/${PROJECT_NAME}/tests"
@@ -34,12 +42,11 @@ if [ -d "$TEST_BINARIES_PATH" ]; then
     TEST_BINARY_PREFIX=${TEST_BINARY:0:4}
     TEST_BINARY_FILE_TYPE=${TEST_BINARY:${#TEST_BINARY}-4:4}
     if [ ${TEST_BINARY_PREFIX} == "test" ] && [ ${TEST_BINARY_FILE_TYPE} == ".cpp" ]; then
-      echo ""
-      TEXT_EXE="${WS}/devel/${PROJECT_NAME}/lib/${PROJECT_NAME}/${TEST_BINARY:0:${#TEST_BINARY}-4}"
-      echo -e "\e[1;96m${TEXT_EXE}\e[0m"
-      ${TEXT_EXE}
-      #echo -e "\e[1;96m${WORKSPACE_PATH}/${PROJECT_NAME}/${TEST_BINARY:0:${#TEST_BINARY}-4}\e[0m"
-  	  #${WORKSPACE_PATH}/${PROJECT_NAME}/${TEST_BINARY:0:${#TEST_BINARY}-4}
+      ${SRRG_SCRIPT_PATH}/run_executable.sh ${PROJECT_NAME} ${TEST_BINARY:0:${#TEST_BINARY}-4} ${WORKSPACE_PATH}
+      # echo ""
+      # TEXT_EXE="${WORKSPACE_PATH}/devel/${PROJECT_NAME}/lib/${PROJECT_NAME}/${TEST_BINARY:0:${#TEST_BINARY}-4}"
+      # echo -e "\e[1;96m${TEXT_EXE}\e[0m"
+      # ${TEXT_EXE}
   	fi
   done
 else
