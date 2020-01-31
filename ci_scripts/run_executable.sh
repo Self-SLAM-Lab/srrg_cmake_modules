@@ -15,6 +15,6 @@ if [[ -z ${WORKSPACE_PATH} ]]; then
 fi
 
 echo ""
-EXE="${WORKSPACE_PATH}/devel/${PROJECT_NAME}/lib/${PROJECT_NAME}/${TEST_BINARY:0:${#TEST_BINARY}-4}"
+EXE="${WORKSPACE_PATH}/devel/${PROJECT_NAME}/lib/${PROJECT_NAME}/${TEST_NAME}"
 echo -e "\e[1;96m${EXE}\e[0m"
 ${EXE}
