@@ -38,6 +38,7 @@ if [ -d "$EXECUTABLES_PATH" ]; then
     EXECUTABLE_PREFIX=${EXECUTABLE:0:9}
     EXECUTABLE_FILE_TYPE=${EXECUTABLE:${#EXECUTABLE}-4:4}
     if [ ${EXECUTABLE_PREFIX} == "benchmark" ] && [ ${EXECUTABLE_FILE_TYPE} == ".cpp" ]; then
+      echo -e "\e[1;96m${EXECUTABLE}\e[0m"
       source ${SRRG_SCRIPT_PATH}/run_executable.sh ${PROJECT_NAME} ${EXECUTABLE:0:${#EXECUTABLE}-4} ${WORKSPACE_PATH}
 
       # echo ""
