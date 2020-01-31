@@ -14,7 +14,7 @@ if [[ -z ${WORKSPACE_PATH} ]]; then
   WORKSPACE_PATH=${WS}
 fi
 
-if [[[-z ${EXE_NAME} ]]; then
+if [[ -z ${EXE_NAME} ]]; then
 echo -e "\e[1;91mEXE_NAME is empty\e[0m"
   exit -1
 fi
