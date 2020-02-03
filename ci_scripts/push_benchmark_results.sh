@@ -25,7 +25,9 @@ COMMIT_MESSAGE="$4"
 cd "$RESULT_REPOSITORY_PATH"
 git config --global user.email "benchamin@srrg.com"
 git config --global user.name "benchamin"
+git stash
 git checkout devel
+git stash pop
 git add "results"
 ls -al
 
