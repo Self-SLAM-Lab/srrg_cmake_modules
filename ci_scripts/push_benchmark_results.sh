@@ -25,7 +25,13 @@ COMMIT_MESSAGE="$4"
 cd "$RESULT_REPOSITORY_PATH"
 git config --global user.email "benchamin@srrg.com"
 git config --global user.name "benchamin"
-git stash
+
+echo -e "\e[1;96mgit stash\e[0m"
+if [[ $(git stash) == *"No stash entries"* ]]; then
+  echo -e "\e[1;96mnothing to commit, bye\e[0m"
+  return 0
+fi
+
 git checkout devel
 git stash pop
 git add "results"
