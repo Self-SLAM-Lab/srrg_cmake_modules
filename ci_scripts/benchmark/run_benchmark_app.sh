@@ -73,8 +73,6 @@ ${EXEC_PATH}app_benchmark -dlc ${DL_SOURCE} -c ${CONFIG} -d "${DATASET}" -f ${TR
 
 kill -9 $ROSCORE_PID
 
-cat out_${TRAJ_FORMAT}.txt
-
 if [[ ! $(pip3 list --format=columns | grep evo)  ]]; then
   echo -e "evo not installed"
   echo -e "run: pip3 install evo --upgrade --no-binary evo"
@@ -96,6 +94,6 @@ evo_rpe ${TRAJ_FORMAT} ${GT_FILE} out_${TRAJ_FORMAT}.txt -va --plot_mode ${PLOT_
 
 unzip -p ${RESULTS_RPE}.zip stats.json > ${RESULTS_RPE}.json
 
-rm ${RESULTS_RPE}.zip 
+rm ${RESULTS_RPE}.zip
 export RESULTS_APE=$(realpath ${RESULTS_APE}.json)
 export RESULTS_RPE=$(realpath ${RESULTS_RPE}.json)
