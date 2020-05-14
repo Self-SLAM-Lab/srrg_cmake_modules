@@ -79,7 +79,7 @@ if [[ $COMMIT_STATUS != *"\"status\":\"success\""* ]]; then
 #  fi
 #  catkin config --whitelist $CATKIN_WHITELIST
 #  export CATKIN_WHITELIST
-  return -1 #ds statement has no effect if script is not sourced
+  return #ds statement has no effect if script is not sourced
   exit -1 #ds escape in any case (skipped when sourcing, otherwise fatal)
 fi
 echo -e "\e[1;96mstatus:success - importing artifacts\e[0m"
