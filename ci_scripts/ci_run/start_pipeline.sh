@@ -18,3 +18,5 @@ REF_BRANCH='devel'
 echo "create pipeline for ${PROJECT_NAME} on branch ${REF_BRANCH}"
 
 RES=$(curl --request POST --header "PRIVATE-TOKEN: ${TOKEN}" "https://gitlab.com/api/v4/projects/srrg-software%2F${PROJECT_NAME}/pipeline?ref=${REF_BRANCH}")
+
+echo $RES
