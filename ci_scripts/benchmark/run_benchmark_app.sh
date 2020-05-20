@@ -51,7 +51,8 @@ if [[ ! -f ${DATASET}  ]]; then
   exit -1;
 fi
 DATASET=$(realpath "${DATASET}")
-
+cd $(dirname ${DATASET})
+echo -e "cd $(dirname ${DATASET})"
 echo -e "dataset: $CYAN${DATASET}$RESET"
 echo -e "config: $CYAN${CONFIG}$RESET"
 echo -e "gt_topic: $CYAN${GT_TOPIC}$RESET"
@@ -69,7 +70,6 @@ else
   ${EXEC_PATH}extract_gt_from_srrg -f ${TRAJ_FORMAT} -i "${DATASET}" -t "${GT_TOPIC}" -o "${GT_FILE}"
 fi
 EXEC_PATH="${DEVEL_PATH}srrg2_slam_interfaces/lib/srrg2_slam_interfaces/"
-cd $(dirname ${DATASET})
 ${EXEC_PATH}app_benchmark -dlc ${DL_SOURCE} -c ${CONFIG} -d "${DATASET}" -f ${TRAJ_FORMAT}
 
 kill -9 $ROSCORE_PID
