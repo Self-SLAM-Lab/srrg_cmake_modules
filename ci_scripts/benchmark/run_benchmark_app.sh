@@ -69,6 +69,7 @@ else
   ${EXEC_PATH}extract_gt_from_srrg -f ${TRAJ_FORMAT} -i "${DATASET}" -t "${GT_TOPIC}" -o "${GT_FILE}"
 fi
 EXEC_PATH="${DEVEL_PATH}srrg2_slam_interfaces/lib/srrg2_slam_interfaces/"
+cd $(dirname ${DATASET})
 ${EXEC_PATH}app_benchmark -dlc ${DL_SOURCE} -c ${CONFIG} -d "${DATASET}" -f ${TRAJ_FORMAT}
 
 kill -9 $ROSCORE_PID
