@@ -7,7 +7,7 @@ set(CMAKE_BUILD_TYPE Release)
 endif()
 
 if (${CMAKE_CXX_COMPILER_VERSION} VERSION_LESS "6.0.0")
-   set(USED_CXX_STD gnu++1z)
+   set(USED_CXX_STD c++1z)
    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=${USED_CXX_STD}")
    message("${PROJECT_NAME}|old compiler, using std=${USED_CXX_STD} flag")
 else()
