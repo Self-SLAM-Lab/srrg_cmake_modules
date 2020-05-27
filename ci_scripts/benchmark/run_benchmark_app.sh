@@ -61,6 +61,12 @@ roscore&
 ROSCORE_PID=$!
 sleep 2
 
+if [[ -z ${WS} ]]; then
+  echo -e "$RED WS not set $RESET"
+  exit -1
+  return;
+fi
+
 DEVEL_PATH="${WS}/devel/"
 if [ ${DATASET: -4} == ".bag" ]; then
   EXEC_PATH="${DEVEL_PATH}srrg2_core_ros/lib/srrg2_core_ros/"
@@ -98,3 +104,5 @@ unzip -p ${RESULTS_RPE}.zip stats.json > ${RESULTS_RPE}.json
 rm ${RESULTS_RPE}.zip
 export RESULTS_APE=$(realpath ${RESULTS_APE}.json)
 export RESULTS_RPE=$(realpath ${RESULTS_RPE}.json)
+export PLOT_APE=$(realpath ${PLOT_APE}.png)
+export PLOT_RPE=$(realpath ${PLOT_RPE}.png)
