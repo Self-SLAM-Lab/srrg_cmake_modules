@@ -16,6 +16,10 @@ ls -al
 
 #ds determine gtest library location in the build folder
 GTEST_LIBRARY_PATH=$(find "build/${PROJECT_NAME}" -name "libgtest.so")
+if [ -z ${GTEST_LIBRARY_PATH} ]; then
+  GTEST_LIBRARY_PATH=$(find "build/${PROJECT_NAME}" -name "libgtestd.so")
+fi
+
 echo -e "\e[1;96mGTEST_LIBRARY_PATH='${GTEST_LIBRARY_PATH}'\e[0m"
 
 #ds package build artifacts for upload
