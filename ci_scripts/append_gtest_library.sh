@@ -5,7 +5,7 @@
 ##### have individual build folder for each package
 
 #ds check input parameters
-if [ "$#" -ne 2 ]; then
+if [[ "$#" < 2 ]]; then
   echo "ERROR: call as $0 PROJECT_ROOT_PATH PROJECT_NAME [PROJECT_BASE_NAME]"
   exit -1
 fi
