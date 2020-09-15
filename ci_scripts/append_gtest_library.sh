@@ -29,6 +29,9 @@ if [ ! -z "$GTEST_LIBRARY_PATH" ]; then
   tar xzf build.tar.gz
   rm build.tar.gz
   GTEST_LIBRARY_PATH_PREVIOUS=$(find "build/" -name "libgtest.so")
+  if [ -z ${GTEST_LIBRARY_PATH_PREVIOUS} ]; then
+    GTEST_LIBRARY_PATH_PREVIOUS=$(find "build/${PROJECT_NAME}" -name "libgtestd.so")
+  fi
   cd "/root/workspace/"
   tar czf ${PROJECT_ROOT_PATH}/artifacts/build.tar.gz "$GTEST_LIBRARY_PATH" "$GTEST_LIBRARY_PATH_PREVIOUS"
 fi
