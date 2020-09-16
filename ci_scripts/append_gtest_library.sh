@@ -1,3 +1,4 @@
+
 #!/bin/bash
 
 ##### tg This script is added in order to run tests on multiple package in the same git repo 
@@ -5,18 +6,14 @@
 ##### have individual build folder for each package
 
 #ds check input parameters
-if [[ "$#" < 2 ]]; then
-  echo "ERROR: call as $0 PROJECT_ROOT_PATH PROJECT_NAME [PROJECT_BASE_NAME]"
+if [ "$#" -ne 2 ]; then
+  echo "ERROR: call as $0 PROJECT_ROOT_PATH PROJECT_NAME"
   exit -1
 fi
 
 #ds parameters
 PROJECT_ROOT_PATH="$1"
 PROJECT_NAME="$2"
-PROJECT_BASE_NAME="$3"
-if [ -z ${PROJECT_BASE_NAME} ]; then
-  PROJECT_BASE_NAME=${PROJECT_NAME}
-fi
 echo -e "\e[1;96m--------------------------------------------------------------------------------\e[0m"
 echo -e "\e[1;96mbash version: ${BASH_VERSION}\e[0m"
 cd "/root/workspace/"
@@ -32,10 +29,11 @@ if [ ! -z "$GTEST_LIBRARY_PATH" ]; then
   cd ${PROJECT_ROOT_PATH}/artifacts/
   tar xzf build.tar.gz
   rm build.tar.gz
-  GTEST_LIBRARY_PATH_PREVIOUS=$(find "build/${PROJECT_BASE_NAME}" -name "libgtest.so")
+  GTEST_LIBRARY_PATH_PREVIOUS=$(find "build/" -name "libgtest.so")
   if [ -z ${GTEST_LIBRARY_PATH} ]; then
-    GTEST_LIBRARY_PATH_PREVIOUS=$(find "build/${PROJECT_BASE_NAME}" -name "libgtestd.so")
+    GTEST_LIBRARY_PATH_PREVIOUS=$(find "build/" -name "libgtestd.so")
   fi
+  echo -e "\e[1;96mGTEST_LIBRARY_PATH_PREVIOUS='${GTEST_LIBRARY_PATH_PREVIOUS}'\e[0m"
   cd "/root/workspace/"
   tar czf ${PROJECT_ROOT_PATH}/artifacts/build.tar.gz "$GTEST_LIBRARY_PATH" "$GTEST_LIBRARY_PATH_PREVIOUS"
 fi
