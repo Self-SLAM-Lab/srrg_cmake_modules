@@ -30,7 +30,7 @@ if [ ! -z "$GTEST_LIBRARY_PATH" ]; then
   tar xzf build.tar.gz
   rm build.tar.gz
   GTEST_LIBRARY_PATH_PREVIOUS=$(find "build/" -name "libgtest.so")
-  if [ -z ${GTEST_LIBRARY_PATH} ]; then
+  if [ -z ${GTEST_LIBRARY_PATH_PREVIOUS} ]; then
     GTEST_LIBRARY_PATH_PREVIOUS=$(find "build/" -name "libgtestd.so")
   fi
   echo -e "\e[1;96mGTEST_LIBRARY_PATH_PREVIOUS='${GTEST_LIBRARY_PATH_PREVIOUS}'\e[0m"
