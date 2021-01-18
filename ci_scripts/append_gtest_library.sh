@@ -2,7 +2,7 @@
 #!/bin/bash
 
 ##### tg This script is added in order to run tests on multiple package in the same git repo 
-##### libgtest.so is appended to the artifacts, this is necessary because il porco dio di catkin build
+##### libgtest.so is appended to the artifacts, this is necessary because of catkin build
 ##### have individual build folder for each package
 
 #ds check input parameters
