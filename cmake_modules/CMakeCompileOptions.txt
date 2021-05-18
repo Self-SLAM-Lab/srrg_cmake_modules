@@ -47,3 +47,8 @@ if (CMAKE_VERSION VERSION_GREATER "3.0")
    message("${PROJECT_NAME}|cxx_standard: ${CMAKE_CXX_STANDARD}")
 endif()
 message("${PROJECT_NAME}|common cxx flags: ${CMAKE_CXX_FLAGS}")
+
+OPTION (SRRG_COMPILE_APPS "compile the non essential srrg applications" ON)
+OPTION (SRRG_COMPILE_BENCHMARKS "compile the srrg regression tests" ON)
+OPTION (SRRG_COMPILE_TESTS "compiles the gtests" ON)
+OPTION (SRRG_COMPILE_EXAMPLES "compiles the examples" ON)
