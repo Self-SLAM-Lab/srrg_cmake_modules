@@ -52,3 +52,26 @@ OPTION (SRRG_COMPILE_APPS "compile the non essential srrg applications" ON)
 OPTION (SRRG_COMPILE_BENCHMARKS "compile the srrg regression tests" ON)
 OPTION (SRRG_COMPILE_TESTS "compiles the gtests" ON)
 OPTION (SRRG_COMPILE_EXAMPLES "compiles the examples" ON)
+
+
+if (SRRG_NOAPPS)
+set(SRRG_COMPILE_APPS OFF)
+endif()
+
+if (SRRG_NOTESTS)
+set(SRRG_COMPILE_TESTS OFF)
+endif()
+
+if (SRRG_NOBENCH)
+set(SRRG_COMPILE_BENCHMARKS OFF)
+endif()
+
+if (SRRG_NOEXAMPLES)
+set(SRRG_COMPILE_EXAMPLES OFF)
+endif()
+
+
+message("COMPILE_APPS ${SRRG_COMPILE_APPS}")
+message("COMPILE EXAMPLES ${SRRG_COMPILE_EXAMPLES}")
+message("COMPILE_TESTS ${SRRG_COMPILE_TESTS}")
+message("COMPILE BENCHMARKS ${SRRG_COMPILE_BENCHMARKS}")
