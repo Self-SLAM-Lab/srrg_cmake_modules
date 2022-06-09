@@ -52,6 +52,7 @@ OPTION (SRRG_COMPILE_APPS "compile the non essential srrg applications" ON)
 OPTION (SRRG_COMPILE_BENCHMARKS "compile the srrg regression tests" ON)
 OPTION (SRRG_COMPILE_TESTS "compiles the gtests" ON)
 OPTION (SRRG_COMPILE_EXAMPLES "compiles the examples" ON)
+OPTION (SRRG_USE_CUDA "uses cuda" OFF)
 
 
 if (SRRG_NOAPPS)
@@ -70,8 +71,20 @@ if (SRRG_NOEXAMPLES)
 set(SRRG_COMPILE_EXAMPLES OFF)
 endif()
 
+if (SRRG_ENABLE_CUDA)
+set(SRRG_USE_CUDA ON)
+endif()
+
+
+if (SRRG_USE_CUDA)
+   add_definitions(-DSRRG_USE_CUDA)
+   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -include cuda_runtime.h")
+else()
+   add_definitions(-D__host__=/**/ -D__device__=/**/)
+endif()
 
 message("COMPILE_APPS ${SRRG_COMPILE_APPS}")
 message("COMPILE EXAMPLES ${SRRG_COMPILE_EXAMPLES}")
 message("COMPILE_TESTS ${SRRG_COMPILE_TESTS}")
 message("COMPILE BENCHMARKS ${SRRG_COMPILE_BENCHMARKS}")
+message("CUDA   ${SRRG_USE_CUDA}")
