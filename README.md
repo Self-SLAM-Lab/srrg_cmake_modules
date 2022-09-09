@@ -49,4 +49,4 @@ See also the list of [contributors](https://github.com/your/project/contributors
 
 ## License
 
-BSD 2.0
+BSD 2.0 
